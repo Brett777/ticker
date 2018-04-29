@@ -1,11 +1,11 @@
 import numpy as np
 import pandas as pd
 
-def windowTransform(df, window):
+def windowTransform(df):
     #Tomorrow's Close. This is the target column    
     df['Close Tomorrow'] = df['Close'].shift(-1)
     df['Close Tomorrow Change'] = df['Close Tomorrow'] - df['Close']
-    df['Close Tomorrow Trend'] = df['Close Tomorrow Change'].apply(np.sign)
+    df['Close Tomorrow Tren'] = df['Close Tomorrow Change'].apply(np.sign)
     
     #Open window
     df['Open-0'] = df.Open
@@ -40,9 +40,9 @@ def windowTransform(df, window):
     df.drop('Close-0',axis=1, inplace=True)                                                                     
 
     #BBand window
-    df['BBand-Upper-0'] = df['bol_bands_upper']
-    df['BBand-Lower-0'] = df['bol_bands_lower']
-    df['BBand-Middle-0'] = df['bol_bands_middle']
+    df['BBand-Upper-0'] = df['Real Upper Band']
+    df['BBand-Lower-0'] = df['Real Lower Band']
+    df['BBand-Middle-0'] = df['Real Middle Band']
 
     for i in range(1,window):
         df['BBand-Upper-'+str(i)] = df.Close.shift(i)
@@ -62,9 +62,14 @@ def windowTransform(df, window):
     df.drop('BBand-Middle-0',axis=1, inplace=True)                                                                        
 
     #Macd window
-    df['MACD-0'] = df['macd_val']
-    df['MACD_Signal-0'] = df['macd_signal_line']
+    df['MACD_Hist-0'] = df['MACD_Hist']
+    df['MACD-0'] = df['MACD']
+    df['MACD_Signal-0'] = df['MACD_Signal']
     for i in range(1,window):
+        df['MACD_Hist-'+str(i)] = df.Close.shift(i)
+        df['MACD_Hist Change-'+str(i-1)] = df['MACD_Hist-'+str(i-1)] - df['MACD_Hist-'+str(i)] 
+        df['MACD_Hist-'+str(i)+' Trend'] = df['MACD_Hist Change-'+str(i-1)].apply(np.sign)
+
         df['MACD-'+str(i)] = df.Close.shift(i)
         df['MACD Change-'+str(i-1)] = df['MACD-'+str(i-1)] - df['MACD-'+str(i)] 
         df['MACD-'+str(i)+' Trend'] = df['MACD Change-'+str(i-1)].apply(np.sign)
@@ -73,21 +78,13 @@ def windowTransform(df, window):
         df['MACD_Signal Change-'+str(i-1)] = df['MACD_Signal-'+str(i-1)] - df['MACD_Signal-'+str(i)] 
         df['MACD_Signal-'+str(i)+' Trend'] = df['MACD_Signal Change-'+str(i-1)].apply(np.sign)
 
+    df.drop('MACD_Hist-0',axis=1, inplace=True)
     df.drop('MACD-0',axis=1, inplace=True)
     df.drop('MACD_Signal-0',axis=1, inplace=True)
                                                                         
     df['DayOfWeek'] = df['Date'].dt.dayofweek
     df['DayOfYear'] = df['Date'].dt.dayofyear
     df['WeekOfYear'] = df['Date'].dt.weekofyear
-  
-    #RSI window
-    df['rsi-0'] = df.rsi
-    for i in range(1,window):
-        df['rsi-'+str(i)] = df.Close.shift(i)
-        df['rsi Change-'+str(i-1)] = df['rsi-'+str(i-1)] - df['rsi-'+str(i)] 
-        df['rsi-'+str(i)+' Trend'] = df['rsi Change-'+str(i-1)].apply(np.sign)
-  
-    df.drop(['rsi-0','rsi_u','rsi_d'], axis=1, inplace=True)
-  
- #   df.replace(0,-1,inplace=True)                                                                        
+                                                                        
+    df.replace(0,-1,inplace=True)                                                                        
     return df
