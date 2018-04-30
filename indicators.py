@@ -610,7 +610,7 @@ Params:
 Returns:
     copy of 'data' DataFrame with 'williams_r' column added
 """
-def williams_r(data, periods=14, high_col='<HIGH>', low_col='<LOW>', close_col='<CLOSE>'):
+def williams_r(data, periods=14, high_col='High', low_col='Low', close_col='Close'):
     data['williams_r'] = 0.
     
     for index,row in data.iterrows():
@@ -655,7 +655,7 @@ Params:
 Returns:
     copy of 'data' DataFrame with 'ultimate_oscillator' column added
 """
-def ultimate_oscillator(data, period_1=7,period_2=14, period_3=28, high_col='<HIGH>', low_col='<LOW>', close_col='<CLOSE>'):
+def ultimate_oscillator(data, period_1=7,period_2=14, period_3=28, high_col='High', low_col='Low', close_col='Close'):
     data['ultimate_oscillator'] = 0.
     data['uo_bp'] = 0.
     data['uo_tr'] = 0.

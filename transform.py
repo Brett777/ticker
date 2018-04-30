@@ -89,5 +89,21 @@ def windowTransform(df, window):
   
     df.drop(['rsi-0','rsi_u','rsi_d'], axis=1, inplace=True)
   
- #   df.replace(0,-1,inplace=True)                                                                        
+    #Williams %R
+    df['williams_r-0'] = df.williams_r
+    for i in range(1,window):
+        df['williams_r-'+str(i)] = df.Close.shift(i)
+        df['williams_r Change-'+str(i-1)] = df['williams_r-'+str(i-1)] - df['williams_r-'+str(i)] 
+        df['williams_r-'+str(i)+' Trend'] = df['williams_r Change-'+str(i-1)].apply(np.sign)
+  
+    df.drop(['williams_r-0'], axis=1, inplace=True)
+  
+    #ultimate_oscillator
+    df['ultimate_oscillator-0'] = df.ultimate_oscillator
+    for i in range(1,window):
+        df['ultimate_oscillator-'+str(i)] = df.Close.shift(i)
+        df['ultimate_oscillator Change-'+str(i-1)] = df['ultimate_oscillator-'+str(i-1)] - df['ultimate_oscillator-'+str(i)] 
+        df['ultimate_oscillator-'+str(i)+' Trend'] = df['ultimate_oscillator Change-'+str(i-1)].apply(np.sign)
+  
+    df.drop(['ultimate_oscillator-0'], axis=1, inplace=True)                                                                       
     return df
