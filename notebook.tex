@@ -1,0 +1,1198 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Stock Market Classification}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Train a Model to Trade on the Stock
+Market}\label{train-a-model-to-trade-on-the-stock-market}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://image.ibb.co/ed08eS/Stock_Market_Investor.jpg}
+\caption{}
+\end{figure}
+
+\subsection{Efficient Market
+Hypothesis}\label{efficient-market-hypothesis}
+
+Future prices cannot be predicted by analyzing prices from the past.
+Excess returns cannot be earned in the long run by using investment
+strategies based on historical share prices or other historical data.
+Technical analysis techniques will not be able to consistently produce
+excess returns.
+
+~
+
+\subsection{Technical Analysis}\label{technical-analysis}
+
+In finance, technical analysis is an analysis methodology for
+forecasting the direction of prices through the study of past market
+data, primarily price and volume. The efficacy of technical analysis is
+disputed by the efficient-market hypothesis which states that stock
+market prices are essentially unpredictable.
+
+~
+
+\subsection{Can a neural net learn Technical Analysis techniques to
+predict the market and make good
+trades?}\label{can-a-neural-net-learn-technical-analysis-techniques-to-predict-the-market-and-make-good-trades}
+
+Are we about to get rich?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{IPython.core.display} \PY{k+kn}{as} \PY{n+nn}{di}
+        
+        \PY{c+c1}{\PYZsh{} This line will hide code by default when the notebook is exported as HTML}
+        \PY{n}{di}\PY{o}{.}\PY{n}{display\PYZus{}html}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}script\PYZgt{}jQuery(function() \PYZob{}if (jQuery(}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{body.notebook\PYZus{}app}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{).length == 0) \PYZob{} jQuery(}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{.input\PYZus{}area}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{).toggle(); jQuery(}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{.prompt}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{).toggle();\PYZcb{}\PYZcb{});\PYZlt{}/script\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{raw}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+        
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{from} \PY{n+nn}{indicators} \PY{k+kn}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{transform} \PY{k+kn}{import} \PY{o}{*}
+        \PY{k+kn}{import} \PY{n+nn}{pandas\PYZus{}datareader} \PY{k+kn}{as} \PY{n+nn}{web}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k+kn}{import} \PY{n}{preprocessing}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.preprocessing} \PY{k+kn}{import} \PY{n}{MinMaxScaler}
+        \PY{k+kn}{import} \PY{n+nn}{h2o}
+        \PY{k+kn}{import} \PY{n+nn}{plotly.plotly} \PY{k+kn}{as} \PY{n+nn}{py}
+        \PY{k+kn}{import} \PY{n+nn}{plotly.graph\PYZus{}objs} \PY{k+kn}{as} \PY{n+nn}{go}
+        \PY{k+kn}{from} \PY{n+nn}{plotly.graph\PYZus{}objs} \PY{k+kn}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{plotly.tools} \PY{k+kn}{import} \PY{n}{FigureFactory} \PY{k}{as} \PY{n}{FF}
+        \PY{k+kn}{import} \PY{n+nn}{cufflinks} \PY{k+kn}{as} \PY{n+nn}{cf}
+        \PY{k+kn}{from} \PY{n+nn}{plots} \PY{k+kn}{import} \PY{o}{*}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{operator}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        
+        \PY{c+c1}{\PYZsh{} Suppress unwatned warnings}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{logging}
+        \PY{n}{logging}\PY{o}{.}\PY{n}{getLogger}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{requests}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{setLevel}\PY{p}{(}\PY{n}{logging}\PY{o}{.}\PY{n}{WARNING}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Set some defaults for how pandas displays}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}rows}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Choose a Stock to
+Predict}\label{choose-a-stock-to-predict}
+
+Enter the stock symbol and the market it's traded on. For fun, enter a
+dollar value to theoretically invest. The window is a sliding time frame
+in days that the algorithm will learn from during training. When making
+predictions, it will help the model to provide data for this many days
+prior to your desired prediction, but it is not mandatory.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{stockSymbol} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PINC}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{market} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NASDAQ}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{invest} \PY{o}{=} \PY{l+m+mi}{1000}
+        
+        \PY{n}{window} \PY{o}{=} \PY{l+m+mi}{15}
+        \PY{n}{start\PYZus{}date} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2013}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{split\PYZus{}validation} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2017}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{split\PYZus{}test} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2018}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Connect to Morningstar and Download the Historical
+Data}\label{connect-to-morningstar-and-download-the-historical-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df} \PY{o}{=} \PY{n}{web}\PY{o}{.}\PY{n}{DataReader}\PY{p}{(}\PY{n}{stockSymbol}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{morningstar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{start}\PY{o}{=}\PY{n}{start\PYZus{}date}\PY{p}{)}
+        \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+        \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Symbol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+        \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Open}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \subsubsection{Plot.ly is a Sweet Charting
+Library}\label{plot.ly-is-a-sweet-charting-library}
+
+This chart shows historical price data for the chosen stock. Also, the
+vertical lines represet the time frames to be used for training,
+validation, and testing.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{myPlotlyKey} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conh5EnFad0Z9Lz6mVWr}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{py}\PY{o}{.}\PY{n}{sign\PYZus{}in}\PY{p}{(}\PY{n}{username}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bretto777}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{api\PYZus{}key}\PY{o}{=}\PY{n}{myPlotlyKey}\PY{p}{)}
+        
+        \PY{n}{fig} \PY{o}{=} \PY{n}{simpleStockChart}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{n}{stockSymbol}\PY{p}{,}\PY{n}{split\PYZus{}validation}\PY{p}{,}\PY{n}{split\PYZus{}test}\PY{p}{)}
+        \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{validate}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The draw time for this plot will be slow for clients without much RAM.
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} <plotly.tools.PlotlyDisplay object>
+\end{Verbatim}
+            
+    \subsubsection{Feature Engineering for Technical
+Analysis}\label{feature-engineering-for-technical-analysis}
+
+In this step, we add "technical indicators" to enrich the data,
+providing the model with additional clues as to whether the stock might
+go up or down. These indicators are commonly used by pro investors to
+make better trading decisions. Hopefully our model will learn to do the
+same!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{capture}
+        df.reset\PYZus{}index(drop=False, inplace=True, col\PYZus{}level=0)
+        
+        typical\PYZus{}price(df, high\PYZus{}col = \PYZsq{}High\PYZsq{}, low\PYZus{}col = \PYZsq{}Low\PYZsq{}, close\PYZus{}col = \PYZsq{}Close\PYZsq{})
+        money\PYZus{}flow\PYZus{}index(df, vol\PYZus{}col=\PYZsq{}Volume\PYZsq{})
+        rsi(df, close\PYZus{}col=\PYZsq{}Close\PYZsq{})
+        ema(df, period=26, column=\PYZsq{}Close\PYZsq{})
+        ema(df, period=12, column=\PYZsq{}Close\PYZsq{})
+        macd(df, period\PYZus{}long=26, period\PYZus{}short=12, period\PYZus{}signal=9, column=\PYZsq{}Close\PYZsq{})
+        on\PYZus{}balance\PYZus{}volume(df, trend\PYZus{}periods=21, close\PYZus{}col=\PYZsq{}Close\PYZsq{}, vol\PYZus{}col=\PYZsq{}Volume\PYZsq{})
+        price\PYZus{}volume\PYZus{}trend(df, trend\PYZus{}periods=21, close\PYZus{}col=\PYZsq{}Close\PYZsq{}, vol\PYZus{}col=\PYZsq{}Volume\PYZsq{})
+        bollinger\PYZus{}bands(df, trend\PYZus{}periods=20, close\PYZus{}col=\PYZsq{}Close\PYZsq{})
+        williams\PYZus{}r(df, periods=14, high\PYZus{}col=\PYZsq{}High\PYZsq{}, low\PYZus{}col=\PYZsq{}Low\PYZsq{}, close\PYZus{}col=\PYZsq{}Close\PYZsq{})
+        ultimate\PYZus{}oscillator(df, period\PYZus{}1=7,period\PYZus{}2=14, period\PYZus{}3=28, high\PYZus{}col=\PYZsq{}High\PYZsq{}, low\PYZus{}col=\PYZsq{}Low\PYZsq{}, close\PYZus{}col=\PYZsq{}Close\PYZsq{})
+        df = df.drop([\PYZsq{}uo\PYZus{}bp\PYZsq{}, \PYZsq{}uo\PYZus{}tr\PYZsq{}, \PYZsq{}uo\PYZus{}avg\PYZus{}1\PYZsq{}, \PYZsq{}uo\PYZus{}avg\PYZus{}2\PYZsq{}, \PYZsq{}uo\PYZus{}avg\PYZus{}3\PYZsq{}], axis=1)
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{technicalAnalysisChart}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+        \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{validate}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} <plotly.tools.PlotlyDisplay object>
+\end{Verbatim}
+            
+    \subsubsection{Transform the Data}\label{transform-the-data}
+
+This sliding window function pivots our sequential data, such that time
+periods in the original data are represented as columns in the new
+dataframe. This transformation allows us to use a wide range of
+supervised machine learning algorithms such as GLMs, GBMs, Random
+Forests, and Neural Networks.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://image.ibb.co/hDU3Dn/sliding_Window.png}
+\caption{}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{windowTransform}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{window}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}          Date   Open    High     Low  Close  Volume  typical\_price    money\_flow  money\_ratio  money\_flow\_index  money\_flow\_positive  money\_flow\_negative       rsi      ema26      ema12  macd\_val  macd\_signal\_line         obv     obv\_ema21           pvt     pvt\_ema21  bol\_bands\_middle  bol\_bands\_upper  bol\_bands\_lower  williams\_r  ultimate\_oscillator  Close Tomorrow  Close Tomorrow Change  Close Tomorrow Trend  Open-1  Open Change  Open-1 Trend  Open-2  Open Change-1  Open-2 Trend  Open-3  Open Change-2  Open-3 Trend  Open-4  Open Change-3  Open-4 Trend  Open-5  Open Change-4  Open-5 Trend  Open-6  Open Change-5  Open-6 Trend  Open-7  Open Change-6  Open-7 Trend  Open-8  Open Change-7  Open-8 Trend  Open-9  Open Change-8  Open-9 Trend  Open-10  Open Change-9  Open-10 Trend  Open-11  Open Change-10  Open-11 Trend  Open-12  Open Change-11  Open-12 Trend  Open-13  Open Change-12  Open-13 Trend  Open-14  Open Change-13  Open-14 Trend  High-1  High Change  High-1 Trend  High-2  \textbackslash{}
+        25 2013-10-31  31.59  32.360  30.740  30.81  215165      31.303333  6.735382e+06     0.688868          0.407887         6.735382e+06         0.000000e+00  0.955983  31.162558  31.232807  0.070249          0.070249  17142506.0  1.790392e+07  1.900380e+07  1.901275e+07         31.180853        32.171867        30.189839    0.686784             0.000000          30.910                  0.100                   1.0   31.90        -0.31          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0   31.07           0.05           1.0   30.74           0.33           1.0   31.66          -0.92          -1.0    31.30           0.36            1.0    31.40           -0.10           -1.0    30.91            0.49            1.0    30.66            0.25            1.0    30.26            0.40            1.0   31.90        0.460           1.0   31.91   
+        26 2013-11-01  31.01  31.200  30.750  30.91  206497      30.953333  6.391770e+06     0.732995          0.422964         6.391770e+06         0.000000e+00  0.957953  31.147920  31.204743  0.056822          0.063182  17349003.0  1.786865e+07  1.900447e+07  1.901223e+07         31.163237        32.162070        30.164403    0.648587             0.000000          31.680                  0.770                   1.0   30.81         0.20           1.0   31.90          -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0   31.07           0.05           1.0   30.74           0.33           1.0    31.66          -0.92           -1.0    31.30            0.36            1.0    31.40           -0.10           -1.0    30.91            0.49            1.0    30.66            0.25            1.0   30.81        0.390           1.0   31.90   
+        27 2013-11-04  30.92  31.910  30.790  31.68  126433      31.460000  3.977582e+06     0.880904          0.468341         0.000000e+00         3.977582e+06  0.963363  31.178126  31.245651  0.067524          0.064785  17475436.0  1.784411e+07  1.900762e+07  1.901194e+07         31.196272        32.212076        30.180467    0.412811             0.000000          31.320                 -0.360                  -1.0   30.91         0.01           1.0   30.81           0.10           1.0   31.90          -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0   31.07           0.05           1.0    30.74           0.33            1.0    31.66           -0.92           -1.0    31.30            0.36            1.0    31.40           -0.10           -1.0    30.91            0.49            1.0   30.91        1.000           1.0   30.81   
+        28 2013-11-05  31.52  31.645  30.760  31.32  256204      31.241667  8.004240e+06     0.975622          0.493830         8.004240e+06         0.000000e+00  0.949759  31.186024  31.251992  0.065968          0.065129  17219232.0  1.780575e+07  1.900471e+07  1.901150e+07         31.204054        32.240583        30.167526    0.641434             0.432642          31.240                 -0.080                  -1.0   31.68        -0.16          -1.0   30.91           0.77           1.0   30.81           0.10           1.0   31.90          -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0    31.07           0.05            1.0    30.74            0.33            1.0    31.66           -0.92           -1.0    31.30            0.36            1.0    31.40           -0.10           -1.0   31.68       -0.035          -1.0   30.91   
+        29 2013-11-06  31.17  31.930  30.770  31.24  267109      31.313333  8.364073e+06     1.264291          0.558361         0.000000e+00         8.364073e+06  0.939103  31.188974  31.250978  0.062003          0.064365  16952123.0  1.775418e+07  1.900403e+07  1.901105e+07         31.206281        32.202343        30.210219    0.681275             0.431759          30.960                 -0.280                  -1.0   31.32        -0.15          -1.0   31.68          -0.36          -1.0   30.91           0.77           1.0   30.81           0.10           1.0   31.90          -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0    31.12           0.33            1.0    31.07            0.05            1.0    30.74            0.33            1.0    31.66           -0.92           -1.0    31.30            0.36            1.0   31.32        0.610           1.0   31.68   
+        30 2013-11-07  31.20  31.500  30.660  30.96   79016      31.040000  2.452657e+06     0.985145          0.496258         2.452657e+06         0.000000e+00  0.823591  31.176677  31.226552  0.049875          0.061273  16873107.0  1.770173e+07  1.900332e+07  1.901059e+07         31.191239        32.136571        30.245907    0.820717             0.398267          30.980                  0.020                   1.0   31.24        -0.04          -1.0   31.32          -0.08          -1.0   31.68          -0.36          -1.0   30.91           0.77           1.0   30.81           0.10           1.0   31.90          -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0    31.45          -0.04           -1.0    31.12            0.33            1.0    31.07            0.05            1.0    30.74            0.33            1.0    31.66           -0.92           -1.0   31.24        0.260           1.0   31.32   
+        31 2013-11-08  30.99  31.120  30.781  30.98  245092      30.960333  7.588130e+06     1.120749          0.528469         7.588130e+06         0.000000e+00  0.831218  31.166287  31.206000  0.039713          0.057140  17118199.0  1.766747e+07  1.900348e+07  1.901017e+07         31.178508        32.072578        30.284438    0.810757             0.397778          31.150                  0.170                   1.0   30.96         0.03           1.0   31.24          -0.28          -1.0   31.32          -0.08          -1.0   31.68          -0.36          -1.0   30.91           0.77           1.0   30.81           0.10           1.0   31.90          -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0    31.41           0.54            1.0    31.45           -0.04           -1.0    31.12            0.33            1.0    31.07            0.05            1.0    30.74            0.33            1.0   30.96        0.160           1.0   31.24   
+        32 2013-11-11  31.00  31.420  30.850  31.15  184049      31.140000  5.731286e+06     0.985739          0.496409         0.000000e+00         5.731286e+06  0.833784  31.165440  31.201362  0.035922          0.053415  17302248.0  1.764631e+07  1.900449e+07  1.900984e+07         31.176811        31.976656        30.376967    0.726096             0.430317          31.000                 -0.150                  -1.0   30.98         0.02           1.0   30.96           0.02           1.0   31.24          -0.28          -1.0   31.32          -0.08          -1.0   31.68          -0.36          -1.0   30.91           0.77           1.0   30.81           0.10           1.0   31.90          -1.09          -1.0   31.91          -0.01          -1.0    31.95          -0.04           -1.0    31.41            0.54            1.0    31.45           -0.04           -1.0    31.12            0.33            1.0    31.07            0.05            1.0   30.98        0.440           1.0   30.96   
+        33 2013-11-12  31.06  31.200  30.500  31.00  315392      30.900000  9.745613e+06     0.673029          0.402282         9.745613e+06         0.000000e+00  0.813895  31.156963  31.184782  0.027818          0.049236  16986856.0  1.760858e+07  1.900297e+07  1.900945e+07         31.166412        31.938822        30.394003    0.800797             0.503874          31.070                  0.070                   1.0   31.15        -0.09          -1.0   30.98           0.17           1.0   30.96           0.02           1.0   31.24          -0.28          -1.0   31.32          -0.08          -1.0   31.68          -0.36          -1.0   30.91           0.77           1.0   30.81           0.10           1.0   31.90          -1.09          -1.0    31.91          -0.01           -1.0    31.95           -0.04           -1.0    31.41            0.54            1.0    31.45           -0.04           -1.0    31.12            0.33            1.0   31.15        0.050           1.0   30.98   
+        34 2013-11-13  30.74  31.100  30.510  31.07  111517      30.893333  3.445132e+06     0.960591          0.489950         3.445132e+06         0.000000e+00  0.752957  31.152570  31.175382  0.022812          0.045179  17098373.0  1.757972e+07  1.900322e+07  1.900910e+07         31.160805        31.932189        30.389420    0.729602             0.529193          31.148                  0.078                   1.0   31.00        -0.26          -1.0   31.15          -0.15          -1.0   30.98           0.17           1.0   30.96           0.02           1.0   31.24          -0.28          -1.0   31.32          -0.08          -1.0   31.68          -0.36          -1.0   30.91           0.77           1.0   30.81           0.10           1.0    31.90          -1.09           -1.0    31.91           -0.01           -1.0    31.95           -0.04           -1.0    31.41            0.54            1.0    31.45           -0.04           -1.0   31.00        0.100           1.0   31.15   
+        
+            High Change-1  High-2 Trend  High-3  High Change-2  High-3 Trend  High-4  High Change-3  High-4 Trend  High-5  High Change-4  High-5 Trend  High-6  High Change-5  High-6 Trend  High-7  High Change-6  High-7 Trend  High-8  High Change-7  High-8 Trend  High-9  High Change-8  High-9 Trend  High-10  High Change-9  High-10 Trend  High-11  High Change-10  High-11 Trend  High-12  High Change-11  High-12 Trend  High-13  High Change-12  High-13 Trend  High-14  High Change-13  High-14 Trend  Low-1  Low Change  Low-1 Trend  Low-2  Low Change-1  Low-2 Trend  Low-3  Low Change-2  Low-3 Trend  Low-4  Low Change-3  Low-4 Trend  Low-5  Low Change-4  Low-5 Trend  Low-6  Low Change-5  Low-6 Trend  Low-7  Low Change-6  Low-7 Trend  Low-8  Low Change-7  Low-8 Trend  Low-9  Low Change-8  Low-9 Trend  Low-10  Low Change-9  Low-10 Trend  Low-11  Low Change-10  Low-11 Trend  Low-12  Low Change-11  Low-12 Trend  Low-13  Low Change-12  Low-13 Trend  Low-14  Low Change-13  Low-14 Trend  Close-1  \textbackslash{}
+        25          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0   31.07           0.05           1.0   30.74           0.33           1.0   31.66          -0.92          -1.0    31.30           0.36            1.0    31.40           -0.10           -1.0    30.91            0.49            1.0    30.66            0.25            1.0    30.26            0.40            1.0  31.90      -1.160         -1.0  31.91         -0.01         -1.0  31.95         -0.04         -1.0  31.41          0.54          1.0  31.45         -0.04         -1.0  31.12          0.33          1.0  31.07          0.05          1.0  30.74          0.33          1.0  31.66         -0.92         -1.0   31.30          0.36           1.0   31.40          -0.10          -1.0   30.91           0.49           1.0   30.66           0.25           1.0   30.26           0.40           1.0    31.90   
+        26          -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0   31.07           0.05           1.0   30.74           0.33           1.0    31.66          -0.92           -1.0    31.30            0.36            1.0    31.40           -0.10           -1.0    30.91            0.49            1.0    30.66            0.25            1.0  30.81      -0.060         -1.0  31.90         -1.09         -1.0  31.91         -0.01         -1.0  31.95         -0.04         -1.0  31.41          0.54          1.0  31.45         -0.04         -1.0  31.12          0.33          1.0  31.07          0.05          1.0  30.74          0.33          1.0   31.66         -0.92          -1.0   31.30           0.36           1.0   31.40          -0.10          -1.0   30.91           0.49           1.0   30.66           0.25           1.0    30.81   
+        27           0.10           1.0   31.90          -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0   31.07           0.05           1.0    30.74           0.33            1.0    31.66           -0.92           -1.0    31.30            0.36            1.0    31.40           -0.10           -1.0    30.91            0.49            1.0  30.91      -0.120         -1.0  30.81          0.10          1.0  31.90         -1.09         -1.0  31.91         -0.01         -1.0  31.95         -0.04         -1.0  31.41          0.54          1.0  31.45         -0.04         -1.0  31.12          0.33          1.0  31.07          0.05          1.0   30.74          0.33           1.0   31.66          -0.92          -1.0   31.30           0.36           1.0   31.40          -0.10          -1.0   30.91           0.49           1.0    30.91   
+        28           0.77           1.0   30.81           0.10           1.0   31.90          -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0    31.07           0.05            1.0    30.74            0.33            1.0    31.66           -0.92           -1.0    31.30            0.36            1.0    31.40           -0.10           -1.0  31.68      -0.920         -1.0  30.91          0.77          1.0  30.81          0.10          1.0  31.90         -1.09         -1.0  31.91         -0.01         -1.0  31.95         -0.04         -1.0  31.41          0.54          1.0  31.45         -0.04         -1.0  31.12          0.33          1.0   31.07          0.05           1.0   30.74           0.33           1.0   31.66          -0.92          -1.0   31.30           0.36           1.0   31.40          -0.10          -1.0    31.68   
+        29          -0.36          -1.0   30.91           0.77           1.0   30.81           0.10           1.0   31.90          -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0    31.12           0.33            1.0    31.07            0.05            1.0    30.74            0.33            1.0    31.66           -0.92           -1.0    31.30            0.36            1.0  31.32      -0.550         -1.0  31.68         -0.36         -1.0  30.91          0.77          1.0  30.81          0.10          1.0  31.90         -1.09         -1.0  31.91         -0.01         -1.0  31.95         -0.04         -1.0  31.41          0.54          1.0  31.45         -0.04         -1.0   31.12          0.33           1.0   31.07           0.05           1.0   30.74           0.33           1.0   31.66          -0.92          -1.0   31.30           0.36           1.0    31.32   
+        30          -0.08          -1.0   31.68          -0.36          -1.0   30.91           0.77           1.0   30.81           0.10           1.0   31.90          -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0    31.45          -0.04           -1.0    31.12            0.33            1.0    31.07            0.05            1.0    30.74            0.33            1.0    31.66           -0.92           -1.0  31.24      -0.580         -1.0  31.32         -0.08         -1.0  31.68         -0.36         -1.0  30.91          0.77          1.0  30.81          0.10          1.0  31.90         -1.09         -1.0  31.91         -0.01         -1.0  31.95         -0.04         -1.0  31.41          0.54          1.0   31.45         -0.04          -1.0   31.12           0.33           1.0   31.07           0.05           1.0   30.74           0.33           1.0   31.66          -0.92          -1.0    31.24   
+        31          -0.28          -1.0   31.32          -0.08          -1.0   31.68          -0.36          -1.0   30.91           0.77           1.0   30.81           0.10           1.0   31.90          -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0    31.41           0.54            1.0    31.45           -0.04           -1.0    31.12            0.33            1.0    31.07            0.05            1.0    30.74            0.33            1.0  30.96      -0.179         -1.0  31.24         -0.28         -1.0  31.32         -0.08         -1.0  31.68         -0.36         -1.0  30.91          0.77          1.0  30.81          0.10          1.0  31.90         -1.09         -1.0  31.91         -0.01         -1.0  31.95         -0.04         -1.0   31.41          0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0   31.07           0.05           1.0   30.74           0.33           1.0    30.96   
+        32           0.02           1.0   31.24          -0.28          -1.0   31.32          -0.08          -1.0   31.68          -0.36          -1.0   30.91           0.77           1.0   30.81           0.10           1.0   31.90          -1.09          -1.0   31.91          -0.01          -1.0    31.95          -0.04           -1.0    31.41            0.54            1.0    31.45           -0.04           -1.0    31.12            0.33            1.0    31.07            0.05            1.0  30.98      -0.130         -1.0  30.96          0.02          1.0  31.24         -0.28         -1.0  31.32         -0.08         -1.0  31.68         -0.36         -1.0  30.91          0.77          1.0  30.81          0.10          1.0  31.90         -1.09         -1.0  31.91         -0.01         -1.0   31.95         -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0   31.07           0.05           1.0    30.98   
+        33           0.17           1.0   30.96           0.02           1.0   31.24          -0.28          -1.0   31.32          -0.08          -1.0   31.68          -0.36          -1.0   30.91           0.77           1.0   30.81           0.10           1.0   31.90          -1.09          -1.0    31.91          -0.01           -1.0    31.95           -0.04           -1.0    31.41            0.54            1.0    31.45           -0.04           -1.0    31.12            0.33            1.0  31.15      -0.650         -1.0  30.98          0.17          1.0  30.96          0.02          1.0  31.24         -0.28         -1.0  31.32         -0.08         -1.0  31.68         -0.36         -1.0  30.91          0.77          1.0  30.81          0.10          1.0  31.90         -1.09         -1.0   31.91         -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0    31.15   
+        34          -0.15          -1.0   30.98           0.17           1.0   30.96           0.02           1.0   31.24          -0.28          -1.0   31.32          -0.08          -1.0   31.68          -0.36          -1.0   30.91           0.77           1.0   30.81           0.10           1.0    31.90          -1.09           -1.0    31.91           -0.01           -1.0    31.95           -0.04           -1.0    31.41            0.54            1.0    31.45           -0.04           -1.0  31.00      -0.490         -1.0  31.15         -0.15         -1.0  30.98          0.17          1.0  30.96          0.02          1.0  31.24         -0.28         -1.0  31.32         -0.08         -1.0  31.68         -0.36         -1.0  30.91          0.77          1.0  30.81          0.10          1.0   31.90         -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0    31.00   
+        
+            Close Change  Close-1 Trend  Close-2  Close Change-1  Close-2 Trend  Close-3  Close Change-2  Close-3 Trend  Close-4  Close Change-3  Close-4 Trend  Close-5  Close Change-4  Close-5 Trend  Close-6  Close Change-5  Close-6 Trend  Close-7  Close Change-6  Close-7 Trend  Close-8  Close Change-7  Close-8 Trend  Close-9  Close Change-8  Close-9 Trend  Close-10  Close Change-9  Close-10 Trend  Close-11  Close Change-10  Close-11 Trend  Close-12  Close Change-11  Close-12 Trend  Close-13  Close Change-12  Close-13 Trend  Close-14  Close Change-13  Close-14 Trend  BBand-Upper-1  BBand-Upper Change  BBand-Upper-1 Trend  BBand-Lower-1  BBand-Lower Change  BBand-Lower-1 Trend  BBand-Middle-1  BBand-Middle Change  BBand-Middle-1 Trend  BBand-Upper-2  BBand-Upper Change-1  BBand-Upper-2 Trend  BBand-Lower-2  BBand-Lower Change-1  BBand-Lower-2 Trend  BBand-Middle-2  BBand-Middle Change-1  BBand-Middle-2 Trend  BBand-Upper-3  BBand-Upper Change-2  BBand-Upper-3 Trend  BBand-Lower-3  \textbackslash{}
+        25         -1.09           -1.0    31.91           -0.01           -1.0    31.95           -0.04           -1.0    31.41            0.54            1.0    31.45           -0.04           -1.0    31.12            0.33            1.0    31.07            0.05            1.0    30.74            0.33            1.0    31.66           -0.92           -1.0     31.30            0.36             1.0     31.40            -0.10            -1.0     30.91             0.49             1.0     30.66             0.25             1.0     30.26             0.40             1.0          31.90            0.271867                  1.0          31.90           -1.710161                 -1.0           31.90            -0.719147                  -1.0          31.91                 -0.01                 -1.0          31.91                 -0.01                 -1.0           31.91                  -0.01                  -1.0          31.95                 -0.04                 -1.0          31.95   
+        26          0.10            1.0    31.90           -1.09           -1.0    31.91           -0.01           -1.0    31.95           -0.04           -1.0    31.41            0.54            1.0    31.45           -0.04           -1.0    31.12            0.33            1.0    31.07            0.05            1.0    30.74            0.33            1.0     31.66           -0.92            -1.0     31.30             0.36             1.0     31.40            -0.10            -1.0     30.91             0.49             1.0     30.66             0.25             1.0          30.81            1.352070                  1.0          30.81           -0.645597                 -1.0           30.81             0.353237                   1.0          31.90                 -1.09                 -1.0          31.90                 -1.09                 -1.0           31.90                  -1.09                  -1.0          31.91                 -0.01                 -1.0          31.91   
+        27          0.77            1.0    30.81            0.10            1.0    31.90           -1.09           -1.0    31.91           -0.01           -1.0    31.95           -0.04           -1.0    31.41            0.54            1.0    31.45           -0.04           -1.0    31.12            0.33            1.0    31.07            0.05            1.0     30.74            0.33             1.0     31.66            -0.92            -1.0     31.30             0.36             1.0     31.40            -0.10            -1.0     30.91             0.49             1.0          30.91            1.302076                  1.0          30.91           -0.729533                 -1.0           30.91             0.286272                   1.0          30.81                  0.10                  1.0          30.81                  0.10                  1.0           30.81                   0.10                   1.0          31.90                 -1.09                 -1.0          31.90   
+        28         -0.36           -1.0    30.91            0.77            1.0    30.81            0.10            1.0    31.90           -1.09           -1.0    31.91           -0.01           -1.0    31.95           -0.04           -1.0    31.41            0.54            1.0    31.45           -0.04           -1.0    31.12            0.33            1.0     31.07            0.05             1.0     30.74             0.33             1.0     31.66            -0.92            -1.0     31.30             0.36             1.0     31.40            -0.10            -1.0          31.68            0.560583                  1.0          31.68           -1.512474                 -1.0           31.68            -0.475946                  -1.0          30.91                  0.77                  1.0          30.91                  0.77                  1.0           30.91                   0.77                   1.0          30.81                  0.10                  1.0          30.81   
+        29         -0.08           -1.0    31.68           -0.36           -1.0    30.91            0.77            1.0    30.81            0.10            1.0    31.90           -1.09           -1.0    31.91           -0.01           -1.0    31.95           -0.04           -1.0    31.41            0.54            1.0    31.45           -0.04           -1.0     31.12            0.33             1.0     31.07             0.05             1.0     30.74             0.33             1.0     31.66            -0.92            -1.0     31.30             0.36             1.0          31.32            0.882343                  1.0          31.32           -1.109781                 -1.0           31.32            -0.113719                  -1.0          31.68                 -0.36                 -1.0          31.68                 -0.36                 -1.0           31.68                  -0.36                  -1.0          30.91                  0.77                  1.0          30.91   
+        30         -0.28           -1.0    31.32           -0.08           -1.0    31.68           -0.36           -1.0    30.91            0.77            1.0    30.81            0.10            1.0    31.90           -1.09           -1.0    31.91           -0.01           -1.0    31.95           -0.04           -1.0    31.41            0.54            1.0     31.45           -0.04            -1.0     31.12             0.33             1.0     31.07             0.05             1.0     30.74             0.33             1.0     31.66            -0.92            -1.0          31.24            0.896571                  1.0          31.24           -0.994093                 -1.0           31.24            -0.048761                  -1.0          31.32                 -0.08                 -1.0          31.32                 -0.08                 -1.0           31.32                  -0.08                  -1.0          31.68                 -0.36                 -1.0          31.68   
+        31          0.02            1.0    31.24           -0.28           -1.0    31.32           -0.08           -1.0    31.68           -0.36           -1.0    30.91            0.77            1.0    30.81            0.10            1.0    31.90           -1.09           -1.0    31.91           -0.01           -1.0    31.95           -0.04           -1.0     31.41            0.54             1.0     31.45            -0.04            -1.0     31.12             0.33             1.0     31.07             0.05             1.0     30.74             0.33             1.0          30.96            1.112578                  1.0          30.96           -0.675562                 -1.0           30.96             0.218508                   1.0          31.24                 -0.28                 -1.0          31.24                 -0.28                 -1.0           31.24                  -0.28                  -1.0          31.32                 -0.08                 -1.0          31.32   
+        32          0.17            1.0    30.96            0.02            1.0    31.24           -0.28           -1.0    31.32           -0.08           -1.0    31.68           -0.36           -1.0    30.91            0.77            1.0    30.81            0.10            1.0    31.90           -1.09           -1.0    31.91           -0.01           -1.0     31.95           -0.04            -1.0     31.41             0.54             1.0     31.45            -0.04            -1.0     31.12             0.33             1.0     31.07             0.05             1.0          30.98            0.996656                  1.0          30.98           -0.603033                 -1.0           30.98             0.196811                   1.0          30.96                  0.02                  1.0          30.96                  0.02                  1.0           30.96                   0.02                   1.0          31.24                 -0.28                 -1.0          31.24   
+        33         -0.15           -1.0    30.98            0.17            1.0    30.96            0.02            1.0    31.24           -0.28           -1.0    31.32           -0.08           -1.0    31.68           -0.36           -1.0    30.91            0.77            1.0    30.81            0.10            1.0    31.90           -1.09           -1.0     31.91           -0.01            -1.0     31.95            -0.04            -1.0     31.41             0.54             1.0     31.45            -0.04            -1.0     31.12             0.33             1.0          31.15            0.788822                  1.0          31.15           -0.755997                 -1.0           31.15             0.016412                   1.0          30.98                  0.17                  1.0          30.98                  0.17                  1.0           30.98                   0.17                   1.0          30.96                  0.02                  1.0          30.96   
+        34          0.07            1.0    31.15           -0.15           -1.0    30.98            0.17            1.0    30.96            0.02            1.0    31.24           -0.28           -1.0    31.32           -0.08           -1.0    31.68           -0.36           -1.0    30.91            0.77            1.0    30.81            0.10            1.0     31.90           -1.09            -1.0     31.91            -0.01            -1.0     31.95            -0.04            -1.0     31.41             0.54             1.0     31.45            -0.04            -1.0          31.00            0.932189                  1.0          31.00           -0.610580                 -1.0           31.00             0.160805                   1.0          31.15                 -0.15                 -1.0          31.15                 -0.15                 -1.0           31.15                  -0.15                  -1.0          30.98                  0.17                  1.0          30.98   
+        
+            BBand-Lower Change-2  BBand-Lower-3 Trend  BBand-Middle-3  BBand-Middle Change-2  BBand-Middle-3 Trend  BBand-Upper-4  BBand-Upper Change-3  BBand-Upper-4 Trend  BBand-Lower-4  BBand-Lower Change-3  BBand-Lower-4 Trend  BBand-Middle-4  BBand-Middle Change-3  BBand-Middle-4 Trend  BBand-Upper-5  BBand-Upper Change-4  BBand-Upper-5 Trend  BBand-Lower-5  BBand-Lower Change-4  BBand-Lower-5 Trend  BBand-Middle-5  BBand-Middle Change-4  BBand-Middle-5 Trend  BBand-Upper-6  BBand-Upper Change-5  BBand-Upper-6 Trend  BBand-Lower-6  BBand-Lower Change-5  BBand-Lower-6 Trend  BBand-Middle-6  BBand-Middle Change-5              {\ldots}               BBand-Middle-10 Trend  BBand-Upper-11  BBand-Upper Change-10  BBand-Upper-11 Trend  BBand-Lower-11  BBand-Lower Change-10  BBand-Lower-11 Trend  BBand-Middle-11  BBand-Middle Change-10  BBand-Middle-11 Trend  BBand-Upper-12  BBand-Upper Change-11  BBand-Upper-12 Trend  BBand-Lower-12  BBand-Lower Change-11  BBand-Lower-12 Trend  BBand-Middle-12  \textbackslash{}
+        25                 -0.04                 -1.0           31.95                  -0.04                  -1.0          31.41                  0.54                  1.0          31.41                  0.54                  1.0           31.41                   0.54                   1.0          31.45                 -0.04                 -1.0          31.45                 -0.04                 -1.0           31.45                  -0.04                  -1.0          31.12                  0.33                  1.0          31.12                  0.33                  1.0           31.12                   0.33              {\ldots}                                 1.0           31.40                  -0.10                  -1.0           31.40                  -0.10                  -1.0            31.40                   -0.10                   -1.0           30.91                   0.49                   1.0           30.91                   0.49                   1.0            30.91   
+        26                 -0.01                 -1.0           31.91                  -0.01                  -1.0          31.95                 -0.04                 -1.0          31.95                 -0.04                 -1.0           31.95                  -0.04                  -1.0          31.41                  0.54                  1.0          31.41                  0.54                  1.0           31.41                   0.54                   1.0          31.45                 -0.04                 -1.0          31.45                 -0.04                 -1.0           31.45                  -0.04              {\ldots}                                -1.0           31.30                   0.36                   1.0           31.30                   0.36                   1.0            31.30                    0.36                    1.0           31.40                  -0.10                  -1.0           31.40                  -0.10                  -1.0            31.40   
+        27                 -1.09                 -1.0           31.90                  -1.09                  -1.0          31.91                 -0.01                 -1.0          31.91                 -0.01                 -1.0           31.91                  -0.01                  -1.0          31.95                 -0.04                 -1.0          31.95                 -0.04                 -1.0           31.95                  -0.04                  -1.0          31.41                  0.54                  1.0          31.41                  0.54                  1.0           31.41                   0.54              {\ldots}                                 1.0           31.66                  -0.92                  -1.0           31.66                  -0.92                  -1.0            31.66                   -0.92                   -1.0           31.30                   0.36                   1.0           31.30                   0.36                   1.0            31.30   
+        28                  0.10                  1.0           30.81                   0.10                   1.0          31.90                 -1.09                 -1.0          31.90                 -1.09                 -1.0           31.90                  -1.09                  -1.0          31.91                 -0.01                 -1.0          31.91                 -0.01                 -1.0           31.91                  -0.01                  -1.0          31.95                 -0.04                 -1.0          31.95                 -0.04                 -1.0           31.95                  -0.04              {\ldots}                                 1.0           30.74                   0.33                   1.0           30.74                   0.33                   1.0            30.74                    0.33                    1.0           31.66                  -0.92                  -1.0           31.66                  -0.92                  -1.0            31.66   
+        29                  0.77                  1.0           30.91                   0.77                   1.0          30.81                  0.10                  1.0          30.81                  0.10                  1.0           30.81                   0.10                   1.0          31.90                 -1.09                 -1.0          31.90                 -1.09                 -1.0           31.90                  -1.09                  -1.0          31.91                 -0.01                 -1.0          31.91                 -0.01                 -1.0           31.91                  -0.01              {\ldots}                                 1.0           31.07                   0.05                   1.0           31.07                   0.05                   1.0            31.07                    0.05                    1.0           30.74                   0.33                   1.0           30.74                   0.33                   1.0            30.74   
+        30                 -0.36                 -1.0           31.68                  -0.36                  -1.0          30.91                  0.77                  1.0          30.91                  0.77                  1.0           30.91                   0.77                   1.0          30.81                  0.10                  1.0          30.81                  0.10                  1.0           30.81                   0.10                   1.0          31.90                 -1.09                 -1.0          31.90                 -1.09                 -1.0           31.90                  -1.09              {\ldots}                                -1.0           31.12                   0.33                   1.0           31.12                   0.33                   1.0            31.12                    0.33                    1.0           31.07                   0.05                   1.0           31.07                   0.05                   1.0            31.07   
+        31                 -0.08                 -1.0           31.32                  -0.08                  -1.0          31.68                 -0.36                 -1.0          31.68                 -0.36                 -1.0           31.68                  -0.36                  -1.0          30.91                  0.77                  1.0          30.91                  0.77                  1.0           30.91                   0.77                   1.0          30.81                  0.10                  1.0          30.81                  0.10                  1.0           30.81                   0.10              {\ldots}                                 1.0           31.45                  -0.04                  -1.0           31.45                  -0.04                  -1.0            31.45                   -0.04                   -1.0           31.12                   0.33                   1.0           31.12                   0.33                   1.0            31.12   
+        32                 -0.28                 -1.0           31.24                  -0.28                  -1.0          31.32                 -0.08                 -1.0          31.32                 -0.08                 -1.0           31.32                  -0.08                  -1.0          31.68                 -0.36                 -1.0          31.68                 -0.36                 -1.0           31.68                  -0.36                  -1.0          30.91                  0.77                  1.0          30.91                  0.77                  1.0           30.91                   0.77              {\ldots}                                -1.0           31.41                   0.54                   1.0           31.41                   0.54                   1.0            31.41                    0.54                    1.0           31.45                  -0.04                  -1.0           31.45                  -0.04                  -1.0            31.45   
+        33                  0.02                  1.0           30.96                   0.02                   1.0          31.24                 -0.28                 -1.0          31.24                 -0.28                 -1.0           31.24                  -0.28                  -1.0          31.32                 -0.08                 -1.0          31.32                 -0.08                 -1.0           31.32                  -0.08                  -1.0          31.68                 -0.36                 -1.0          31.68                 -0.36                 -1.0           31.68                  -0.36              {\ldots}                                -1.0           31.95                  -0.04                  -1.0           31.95                  -0.04                  -1.0            31.95                   -0.04                   -1.0           31.41                   0.54                   1.0           31.41                   0.54                   1.0            31.41   
+        34                  0.17                  1.0           30.98                   0.17                   1.0          30.96                  0.02                  1.0          30.96                  0.02                  1.0           30.96                   0.02                   1.0          31.24                 -0.28                 -1.0          31.24                 -0.28                 -1.0           31.24                  -0.28                  -1.0          31.32                 -0.08                 -1.0          31.32                 -0.08                 -1.0           31.32                  -0.08              {\ldots}                                -1.0           31.91                  -0.01                  -1.0           31.91                  -0.01                  -1.0            31.91                   -0.01                   -1.0           31.95                  -0.04                  -1.0           31.95                  -0.04                  -1.0            31.95   
+        
+            BBand-Middle Change-11  BBand-Middle-12 Trend  BBand-Upper-13  BBand-Upper Change-12  BBand-Upper-13 Trend  BBand-Lower-13  BBand-Lower Change-12  BBand-Lower-13 Trend  BBand-Middle-13  BBand-Middle Change-12  BBand-Middle-13 Trend  BBand-Upper-14  BBand-Upper Change-13  BBand-Upper-14 Trend  BBand-Lower-14  BBand-Lower Change-13  BBand-Lower-14 Trend  BBand-Middle-14  BBand-Middle Change-13  BBand-Middle-14 Trend  MACD-1  MACD Change  MACD-1 Trend  MACD\_Signal-1  MACD\_Signal Change  MACD\_Signal-1 Trend  MACD-2  MACD Change-1  MACD-2 Trend  MACD\_Signal-2  MACD\_Signal Change-1  MACD\_Signal-2 Trend  MACD-3  MACD Change-2  MACD-3 Trend  MACD\_Signal-3  MACD\_Signal Change-2  MACD\_Signal-3 Trend  MACD-4  MACD Change-3  MACD-4 Trend  MACD\_Signal-4  MACD\_Signal Change-3  MACD\_Signal-4 Trend  MACD-5  MACD Change-4  MACD-5 Trend  MACD\_Signal-5  MACD\_Signal Change-4  MACD\_Signal-5 Trend  MACD-6  MACD Change-5  MACD-6 Trend  MACD\_Signal-6  MACD\_Signal Change-5  MACD\_Signal-6 Trend  MACD-7  \textbackslash{}
+        25                    0.49                    1.0           30.66                   0.25                   1.0           30.66                   0.25                   1.0            30.66                    0.25                    1.0           30.26                   0.40                   1.0           30.26                   0.40                   1.0            30.26                    0.40                    1.0   31.90   -31.829751          -1.0          31.90          -31.829751                 -1.0   31.91          -0.01          -1.0          31.91                 -0.01                 -1.0   31.95          -0.04          -1.0          31.95                 -0.04                 -1.0   31.41           0.54           1.0          31.41                  0.54                  1.0   31.45          -0.04          -1.0          31.45                 -0.04                 -1.0   31.12           0.33           1.0          31.12                  0.33                  1.0   31.07   
+        26                   -0.10                   -1.0           30.91                   0.49                   1.0           30.91                   0.49                   1.0            30.91                    0.49                    1.0           30.66                   0.25                   1.0           30.66                   0.25                   1.0            30.66                    0.25                    1.0   30.81   -30.753178          -1.0          30.81          -30.746818                 -1.0   31.90          -1.09          -1.0          31.90                 -1.09                 -1.0   31.91          -0.01          -1.0          31.91                 -0.01                 -1.0   31.95          -0.04          -1.0          31.95                 -0.04                 -1.0   31.41           0.54           1.0          31.41                  0.54                  1.0   31.45          -0.04          -1.0          31.45                 -0.04                 -1.0   31.12   
+        27                    0.36                    1.0           31.40                  -0.10                  -1.0           31.40                  -0.10                  -1.0            31.40                   -0.10                   -1.0           30.91                   0.49                   1.0           30.91                   0.49                   1.0            30.91                    0.49                    1.0   30.91   -30.842476          -1.0          30.91          -30.845215                 -1.0   30.81           0.10           1.0          30.81                  0.10                  1.0   31.90          -1.09          -1.0          31.90                 -1.09                 -1.0   31.91          -0.01          -1.0          31.91                 -0.01                 -1.0   31.95          -0.04          -1.0          31.95                 -0.04                 -1.0   31.41           0.54           1.0          31.41                  0.54                  1.0   31.45   
+        28                   -0.92                   -1.0           31.30                   0.36                   1.0           31.30                   0.36                   1.0            31.30                    0.36                    1.0           31.40                  -0.10                  -1.0           31.40                  -0.10                  -1.0            31.40                   -0.10                   -1.0   31.68   -31.614032          -1.0          31.68          -31.614871                 -1.0   30.91           0.77           1.0          30.91                  0.77                  1.0   30.81           0.10           1.0          30.81                  0.10                  1.0   31.90          -1.09          -1.0          31.90                 -1.09                 -1.0   31.91          -0.01          -1.0          31.91                 -0.01                 -1.0   31.95          -0.04          -1.0          31.95                 -0.04                 -1.0   31.41   
+        29                    0.33                    1.0           31.66                  -0.92                  -1.0           31.66                  -0.92                  -1.0            31.66                   -0.92                   -1.0           31.30                   0.36                   1.0           31.30                   0.36                   1.0            31.30                    0.36                    1.0   31.32   -31.257997          -1.0          31.32          -31.255635                 -1.0   31.68          -0.36          -1.0          31.68                 -0.36                 -1.0   30.91           0.77           1.0          30.91                  0.77                  1.0   30.81           0.10           1.0          30.81                  0.10                  1.0   31.90          -1.09          -1.0          31.90                 -1.09                 -1.0   31.91          -0.01          -1.0          31.91                 -0.01                 -1.0   31.95   
+        30                    0.05                    1.0           30.74                   0.33                   1.0           30.74                   0.33                   1.0            30.74                    0.33                    1.0           31.66                  -0.92                  -1.0           31.66                  -0.92                  -1.0            31.66                   -0.92                   -1.0   31.24   -31.190125          -1.0          31.24          -31.178727                 -1.0   31.32          -0.08          -1.0          31.32                 -0.08                 -1.0   31.68          -0.36          -1.0          31.68                 -0.36                 -1.0   30.91           0.77           1.0          30.91                  0.77                  1.0   30.81           0.10           1.0          30.81                  0.10                  1.0   31.90          -1.09          -1.0          31.90                 -1.09                 -1.0   31.91   
+        31                    0.33                    1.0           31.07                   0.05                   1.0           31.07                   0.05                   1.0            31.07                    0.05                    1.0           30.74                   0.33                   1.0           30.74                   0.33                   1.0            30.74                    0.33                    1.0   30.96   -30.920287          -1.0          30.96          -30.902860                 -1.0   31.24          -0.28          -1.0          31.24                 -0.28                 -1.0   31.32          -0.08          -1.0          31.32                 -0.08                 -1.0   31.68          -0.36          -1.0          31.68                 -0.36                 -1.0   30.91           0.77           1.0          30.91                  0.77                  1.0   30.81           0.10           1.0          30.81                  0.10                  1.0   31.90   
+        32                   -0.04                   -1.0           31.12                   0.33                   1.0           31.12                   0.33                   1.0            31.12                    0.33                    1.0           31.07                   0.05                   1.0           31.07                   0.05                   1.0            31.07                    0.05                    1.0   30.98   -30.944078          -1.0          30.98          -30.926585                 -1.0   30.96           0.02           1.0          30.96                  0.02                  1.0   31.24          -0.28          -1.0          31.24                 -0.28                 -1.0   31.32          -0.08          -1.0          31.32                 -0.08                 -1.0   31.68          -0.36          -1.0          31.68                 -0.36                 -1.0   30.91           0.77           1.0          30.91                  0.77                  1.0   30.81   
+        33                    0.54                    1.0           31.45                  -0.04                  -1.0           31.45                  -0.04                  -1.0            31.45                   -0.04                   -1.0           31.12                   0.33                   1.0           31.12                   0.33                   1.0            31.12                    0.33                    1.0   31.15   -31.122182          -1.0          31.15          -31.100764                 -1.0   30.98           0.17           1.0          30.98                  0.17                  1.0   30.96           0.02           1.0          30.96                  0.02                  1.0   31.24          -0.28          -1.0          31.24                 -0.28                 -1.0   31.32          -0.08          -1.0          31.32                 -0.08                 -1.0   31.68          -0.36          -1.0          31.68                 -0.36                 -1.0   30.91   
+        34                   -0.04                   -1.0           31.41                   0.54                   1.0           31.41                   0.54                   1.0            31.41                    0.54                    1.0           31.45                  -0.04                  -1.0           31.45                  -0.04                  -1.0            31.45                   -0.04                   -1.0   31.00   -30.977188          -1.0          31.00          -30.954821                 -1.0   31.15          -0.15          -1.0          31.15                 -0.15                 -1.0   30.98           0.17           1.0          30.98                  0.17                  1.0   30.96           0.02           1.0          30.96                  0.02                  1.0   31.24          -0.28          -1.0          31.24                 -0.28                 -1.0   31.32          -0.08          -1.0          31.32                 -0.08                 -1.0   31.68   
+        
+            MACD Change-6  MACD-7 Trend  MACD\_Signal-7  MACD\_Signal Change-6  MACD\_Signal-7 Trend  MACD-8  MACD Change-7  MACD-8 Trend  MACD\_Signal-8  MACD\_Signal Change-7  MACD\_Signal-8 Trend  MACD-9  MACD Change-8  MACD-9 Trend  MACD\_Signal-9  MACD\_Signal Change-8  MACD\_Signal-9 Trend  MACD-10  MACD Change-9  MACD-10 Trend  MACD\_Signal-10  MACD\_Signal Change-9  MACD\_Signal-10 Trend  MACD-11  MACD Change-10  MACD-11 Trend  MACD\_Signal-11  MACD\_Signal Change-10  MACD\_Signal-11 Trend  MACD-12  MACD Change-11  MACD-12 Trend  MACD\_Signal-12  MACD\_Signal Change-11  MACD\_Signal-12 Trend  MACD-13  MACD Change-12  MACD-13 Trend  MACD\_Signal-13  MACD\_Signal Change-12  MACD\_Signal-13 Trend  MACD-14  MACD Change-13  MACD-14 Trend  MACD\_Signal-14  MACD\_Signal Change-13  MACD\_Signal-14 Trend  DayOfWeek  DayOfYear  WeekOfYear  rsi-1  rsi Change  rsi-1 Trend  rsi-2  rsi Change-1  rsi-2 Trend  rsi-3  rsi Change-2  rsi-3 Trend  rsi-4  rsi Change-3  rsi-4 Trend  rsi-5  rsi Change-4  rsi-5 Trend  rsi-6  \textbackslash{}
+        25           0.05           1.0          31.07                  0.05                  1.0   30.74           0.33           1.0          30.74                  0.33                  1.0   31.66          -0.92          -1.0          31.66                 -0.92                 -1.0    31.30           0.36            1.0           31.30                  0.36                   1.0    31.40           -0.10           -1.0           31.40                  -0.10                  -1.0    30.91            0.49            1.0           30.91                   0.49                   1.0    30.66            0.25            1.0           30.66                   0.25                   1.0    30.26            0.40            1.0           30.26                   0.40                   1.0          3        304          44  31.90  -30.944017         -1.0  31.91         -0.01         -1.0  31.95         -0.04         -1.0  31.41          0.54          1.0  31.45         -0.04         -1.0  31.12   
+        26           0.33           1.0          31.12                  0.33                  1.0   31.07           0.05           1.0          31.07                  0.05                  1.0   30.74           0.33           1.0          30.74                  0.33                  1.0    31.66          -0.92           -1.0           31.66                 -0.92                  -1.0    31.30            0.36            1.0           31.30                   0.36                   1.0    31.40           -0.10           -1.0           31.40                  -0.10                  -1.0    30.91            0.49            1.0           30.91                   0.49                   1.0    30.66            0.25            1.0           30.66                   0.25                   1.0          4        305          44  30.81  -29.852047         -1.0  31.90         -1.09         -1.0  31.91         -0.01         -1.0  31.95         -0.04         -1.0  31.41          0.54          1.0  31.45   
+        27          -0.04          -1.0          31.45                 -0.04                 -1.0   31.12           0.33           1.0          31.12                  0.33                  1.0   31.07           0.05           1.0          31.07                  0.05                  1.0    30.74           0.33            1.0           30.74                  0.33                   1.0    31.66           -0.92           -1.0           31.66                  -0.92                  -1.0    31.30            0.36            1.0           31.30                   0.36                   1.0    31.40           -0.10           -1.0           31.40                  -0.10                  -1.0    30.91            0.49            1.0           30.91                   0.49                   1.0          0        308          45  30.91  -29.946637         -1.0  30.81          0.10          1.0  31.90         -1.09         -1.0  31.91         -0.01         -1.0  31.95         -0.04         -1.0  31.41   
+        28           0.54           1.0          31.41                  0.54                  1.0   31.45          -0.04          -1.0          31.45                 -0.04                 -1.0   31.12           0.33           1.0          31.12                  0.33                  1.0    31.07           0.05            1.0           31.07                  0.05                   1.0    30.74            0.33            1.0           30.74                   0.33                   1.0    31.66           -0.92           -1.0           31.66                  -0.92                  -1.0    31.30            0.36            1.0           31.30                   0.36                   1.0    31.40           -0.10           -1.0           31.40                  -0.10                  -1.0          1        309          45  31.68  -30.730241         -1.0  30.91          0.77          1.0  30.81          0.10          1.0  31.90         -1.09         -1.0  31.91         -0.01         -1.0  31.95   
+        29          -0.04          -1.0          31.95                 -0.04                 -1.0   31.41           0.54           1.0          31.41                  0.54                  1.0   31.45          -0.04          -1.0          31.45                 -0.04                 -1.0    31.12           0.33            1.0           31.12                  0.33                   1.0    31.07            0.05            1.0           31.07                   0.05                   1.0    30.74            0.33            1.0           30.74                   0.33                   1.0    31.66           -0.92           -1.0           31.66                  -0.92                  -1.0    31.30            0.36            1.0           31.30                   0.36                   1.0          2        310          45  31.32  -30.380897         -1.0  31.68         -0.36         -1.0  30.91          0.77          1.0  30.81          0.10          1.0  31.90         -1.09         -1.0  31.91   
+        30          -0.01          -1.0          31.91                 -0.01                 -1.0   31.95          -0.04          -1.0          31.95                 -0.04                 -1.0   31.41           0.54           1.0          31.41                  0.54                  1.0    31.45          -0.04           -1.0           31.45                 -0.04                  -1.0    31.12            0.33            1.0           31.12                   0.33                   1.0    31.07            0.05            1.0           31.07                   0.05                   1.0    30.74            0.33            1.0           30.74                   0.33                   1.0    31.66           -0.92           -1.0           31.66                  -0.92                  -1.0          3        311          45  31.24  -30.416409         -1.0  31.32         -0.08         -1.0  31.68         -0.36         -1.0  30.91          0.77          1.0  30.81          0.10          1.0  31.90   
+        31          -1.09          -1.0          31.90                 -1.09                 -1.0   31.91          -0.01          -1.0          31.91                 -0.01                 -1.0   31.95          -0.04          -1.0          31.95                 -0.04                 -1.0    31.41           0.54            1.0           31.41                  0.54                   1.0    31.45           -0.04           -1.0           31.45                  -0.04                  -1.0    31.12            0.33            1.0           31.12                   0.33                   1.0    31.07            0.05            1.0           31.07                   0.05                   1.0    30.74            0.33            1.0           30.74                   0.33                   1.0          4        312          45  30.96  -30.128782         -1.0  31.24         -0.28         -1.0  31.32         -0.08         -1.0  31.68         -0.36         -1.0  30.91          0.77          1.0  30.81   
+        32           0.10           1.0          30.81                  0.10                  1.0   31.90          -1.09          -1.0          31.90                 -1.09                 -1.0   31.91          -0.01          -1.0          31.91                 -0.01                 -1.0    31.95          -0.04           -1.0           31.95                 -0.04                  -1.0    31.41            0.54            1.0           31.41                   0.54                   1.0    31.45           -0.04           -1.0           31.45                  -0.04                  -1.0    31.12            0.33            1.0           31.12                   0.33                   1.0    31.07            0.05            1.0           31.07                   0.05                   1.0          0        315          46  30.98  -30.146216         -1.0  30.96          0.02          1.0  31.24         -0.28         -1.0  31.32         -0.08         -1.0  31.68         -0.36         -1.0  30.91   
+        33           0.77           1.0          30.91                  0.77                  1.0   30.81           0.10           1.0          30.81                  0.10                  1.0   31.90          -1.09          -1.0          31.90                 -1.09                 -1.0    31.91          -0.01           -1.0           31.91                 -0.01                  -1.0    31.95           -0.04           -1.0           31.95                  -0.04                  -1.0    31.41            0.54            1.0           31.41                   0.54                   1.0    31.45           -0.04           -1.0           31.45                  -0.04                  -1.0    31.12            0.33            1.0           31.12                   0.33                   1.0          1        316          46  31.15  -30.336105         -1.0  30.98          0.17          1.0  30.96          0.02          1.0  31.24         -0.28         -1.0  31.32         -0.08         -1.0  31.68   
+        34          -0.36          -1.0          31.68                 -0.36                 -1.0   30.91           0.77           1.0          30.91                  0.77                  1.0   30.81           0.10           1.0          30.81                  0.10                  1.0    31.90          -1.09           -1.0           31.90                 -1.09                  -1.0    31.91           -0.01           -1.0           31.91                  -0.01                  -1.0    31.95           -0.04           -1.0           31.95                  -0.04                  -1.0    31.41            0.54            1.0           31.41                   0.54                   1.0    31.45           -0.04           -1.0           31.45                  -0.04                  -1.0          2        317          46  31.00  -30.247043         -1.0  31.15         -0.15         -1.0  30.98          0.17          1.0  30.96          0.02          1.0  31.24         -0.28         -1.0  31.32   
+        
+            rsi Change-5  rsi-6 Trend  rsi-7  rsi Change-6  rsi-7 Trend  rsi-8  rsi Change-7  rsi-8 Trend  rsi-9  rsi Change-8  rsi-9 Trend  rsi-10  rsi Change-9  rsi-10 Trend  rsi-11  rsi Change-10  rsi-11 Trend  rsi-12  rsi Change-11  rsi-12 Trend  rsi-13  rsi Change-12  rsi-13 Trend  rsi-14  rsi Change-13  rsi-14 Trend  williams\_r-1  williams\_r Change  williams\_r-1 Trend  williams\_r-2  williams\_r Change-1  williams\_r-2 Trend  williams\_r-3  williams\_r Change-2  williams\_r-3 Trend  williams\_r-4  williams\_r Change-3  williams\_r-4 Trend  williams\_r-5  williams\_r Change-4  williams\_r-5 Trend  williams\_r-6  williams\_r Change-5  williams\_r-6 Trend  williams\_r-7  williams\_r Change-6  williams\_r-7 Trend  williams\_r-8  williams\_r Change-7  williams\_r-8 Trend  williams\_r-9  williams\_r Change-8  williams\_r-9 Trend  williams\_r-10  williams\_r Change-9  williams\_r-10 Trend  williams\_r-11  williams\_r Change-10  williams\_r-11 Trend  williams\_r-12  williams\_r Change-11  williams\_r-12 Trend  williams\_r-13  \textbackslash{}
+        25          0.33          1.0  31.07          0.05          1.0  30.74          0.33          1.0  31.66         -0.92         -1.0   31.30          0.36           1.0   31.40          -0.10          -1.0   30.91           0.49           1.0   30.66           0.25           1.0   30.26           0.40           1.0         31.90         -31.213216                -1.0         31.91                -0.01                -1.0         31.95                -0.04                -1.0         31.41                 0.54                 1.0         31.45                -0.04                -1.0         31.12                 0.33                 1.0         31.07                 0.05                 1.0         30.74                 0.33                 1.0         31.66                -0.92                -1.0          31.30                 0.36                  1.0          31.40                 -0.10                 -1.0          30.91                  0.49                  1.0          30.66   
+        26         -0.04         -1.0  31.12          0.33          1.0  31.07          0.05          1.0  30.74          0.33          1.0   31.66         -0.92          -1.0   31.30           0.36           1.0   31.40          -0.10          -1.0   30.91           0.49           1.0   30.66           0.25           1.0         30.81         -30.161413                -1.0         31.90                -1.09                -1.0         31.91                -0.01                -1.0         31.95                -0.04                -1.0         31.41                 0.54                 1.0         31.45                -0.04                -1.0         31.12                 0.33                 1.0         31.07                 0.05                 1.0         30.74                 0.33                 1.0          31.66                -0.92                 -1.0          31.30                  0.36                  1.0          31.40                 -0.10                 -1.0          30.91   
+        27          0.54          1.0  31.45         -0.04         -1.0  31.12          0.33          1.0  31.07          0.05          1.0   30.74          0.33           1.0   31.66          -0.92          -1.0   31.30           0.36           1.0   31.40          -0.10          -1.0   30.91           0.49           1.0         30.91         -30.497189                -1.0         30.81                 0.10                 1.0         31.90                -1.09                -1.0         31.91                -0.01                -1.0         31.95                -0.04                -1.0         31.41                 0.54                 1.0         31.45                -0.04                -1.0         31.12                 0.33                 1.0         31.07                 0.05                 1.0          30.74                 0.33                  1.0          31.66                 -0.92                 -1.0          31.30                  0.36                  1.0          31.40   
+        28         -0.04         -1.0  31.41          0.54          1.0  31.45         -0.04         -1.0  31.12          0.33          1.0   31.07          0.05           1.0   30.74           0.33           1.0   31.66          -0.92          -1.0   31.30           0.36           1.0   31.40          -0.10          -1.0         31.68         -31.038566                -1.0         30.91                 0.77                 1.0         30.81                 0.10                 1.0         31.90                -1.09                -1.0         31.91                -0.01                -1.0         31.95                -0.04                -1.0         31.41                 0.54                 1.0         31.45                -0.04                -1.0         31.12                 0.33                 1.0          31.07                 0.05                  1.0          30.74                  0.33                  1.0          31.66                 -0.92                 -1.0          31.30   
+        29         -0.01         -1.0  31.95         -0.04         -1.0  31.41          0.54          1.0  31.45         -0.04         -1.0   31.12          0.33           1.0   31.07           0.05           1.0   30.74           0.33           1.0   31.66          -0.92          -1.0   31.30           0.36           1.0         31.32         -30.638725                -1.0         31.68                -0.36                -1.0         30.91                 0.77                 1.0         30.81                 0.10                 1.0         31.90                -1.09                -1.0         31.91                -0.01                -1.0         31.95                -0.04                -1.0         31.41                 0.54                 1.0         31.45                -0.04                -1.0          31.12                 0.33                  1.0          31.07                  0.05                  1.0          30.74                  0.33                  1.0          31.66   
+        30         -1.09         -1.0  31.91         -0.01         -1.0  31.95         -0.04         -1.0  31.41          0.54          1.0   31.45         -0.04          -1.0   31.12           0.33           1.0   31.07           0.05           1.0   30.74           0.33           1.0   31.66          -0.92          -1.0         31.24         -30.419283                -1.0         31.32                -0.08                -1.0         31.68                -0.36                -1.0         30.91                 0.77                 1.0         30.81                 0.10                 1.0         31.90                -1.09                -1.0         31.91                -0.01                -1.0         31.95                -0.04                -1.0         31.41                 0.54                 1.0          31.45                -0.04                 -1.0          31.12                  0.33                  1.0          31.07                  0.05                  1.0          30.74   
+        31          0.10          1.0  31.90         -1.09         -1.0  31.91         -0.01         -1.0  31.95         -0.04         -1.0   31.41          0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0   31.07           0.05           1.0   30.74           0.33           1.0         30.96         -30.149243                -1.0         31.24                -0.28                -1.0         31.32                -0.08                -1.0         31.68                -0.36                -1.0         30.91                 0.77                 1.0         30.81                 0.10                 1.0         31.90                -1.09                -1.0         31.91                -0.01                -1.0         31.95                -0.04                -1.0          31.41                 0.54                  1.0          31.45                 -0.04                 -1.0          31.12                  0.33                  1.0          31.07   
+        32          0.77          1.0  30.81          0.10          1.0  31.90         -1.09         -1.0  31.91         -0.01         -1.0   31.95         -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0   31.07           0.05           1.0         30.98         -30.253904                -1.0         30.96                 0.02                 1.0         31.24                -0.28                -1.0         31.32                -0.08                -1.0         31.68                -0.36                -1.0         30.91                 0.77                 1.0         30.81                 0.10                 1.0         31.90                -1.09                -1.0         31.91                -0.01                -1.0          31.95                -0.04                 -1.0          31.41                  0.54                  1.0          31.45                 -0.04                 -1.0          31.12   
+        33         -0.36         -1.0  30.91          0.77          1.0  30.81          0.10          1.0  31.90         -1.09         -1.0   31.91         -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0   31.12           0.33           1.0         31.15         -30.349203                -1.0         30.98                 0.17                 1.0         30.96                 0.02                 1.0         31.24                -0.28                -1.0         31.32                -0.08                -1.0         31.68                -0.36                -1.0         30.91                 0.77                 1.0         30.81                 0.10                 1.0         31.90                -1.09                -1.0          31.91                -0.01                 -1.0          31.95                 -0.04                 -1.0          31.41                  0.54                  1.0          31.45   
+        34         -0.08         -1.0  31.68         -0.36         -1.0  30.91          0.77          1.0  30.81          0.10          1.0   31.90         -1.09          -1.0   31.91          -0.01          -1.0   31.95          -0.04          -1.0   31.41           0.54           1.0   31.45          -0.04          -1.0         31.00         -30.270398                -1.0         31.15                -0.15                -1.0         30.98                 0.17                 1.0         30.96                 0.02                 1.0         31.24                -0.28                -1.0         31.32                -0.08                -1.0         31.68                -0.36                -1.0         30.91                 0.77                 1.0         30.81                 0.10                 1.0          31.90                -1.09                 -1.0          31.91                 -0.01                 -1.0          31.95                 -0.04                 -1.0          31.41   
+        
+            williams\_r Change-12  williams\_r-13 Trend  williams\_r-14  williams\_r Change-13  williams\_r-14 Trend  ultimate\_oscillator-1  ultimate\_oscillator Change  ultimate\_oscillator-1 Trend  ultimate\_oscillator-2  ultimate\_oscillator Change-1  ultimate\_oscillator-2 Trend  ultimate\_oscillator-3  ultimate\_oscillator Change-2  ultimate\_oscillator-3 Trend  ultimate\_oscillator-4  ultimate\_oscillator Change-3  ultimate\_oscillator-4 Trend  ultimate\_oscillator-5  ultimate\_oscillator Change-4  ultimate\_oscillator-5 Trend  ultimate\_oscillator-6  ultimate\_oscillator Change-5  ultimate\_oscillator-6 Trend  ultimate\_oscillator-7  ultimate\_oscillator Change-6  ultimate\_oscillator-7 Trend  ultimate\_oscillator-8  ultimate\_oscillator Change-7  ultimate\_oscillator-8 Trend  ultimate\_oscillator-9  ultimate\_oscillator Change-8  ultimate\_oscillator-9 Trend  ultimate\_oscillator-10  ultimate\_oscillator Change-9  ultimate\_oscillator-10 Trend  ultimate\_oscillator-11  ultimate\_oscillator Change-10  \textbackslash{}
+        25                  0.25                  1.0          30.26                  0.40                  1.0                  31.90                  -31.900000                         -1.0                  31.91                         -0.01                         -1.0                  31.95                         -0.04                         -1.0                  31.41                          0.54                          1.0                  31.45                         -0.04                         -1.0                  31.12                          0.33                          1.0                  31.07                          0.05                          1.0                  30.74                          0.33                          1.0                  31.66                         -0.92                         -1.0                   31.30                          0.36                           1.0                   31.40                          -0.10   
+        26                  0.49                  1.0          30.66                  0.25                  1.0                  30.81                  -30.810000                         -1.0                  31.90                         -1.09                         -1.0                  31.91                         -0.01                         -1.0                  31.95                         -0.04                         -1.0                  31.41                          0.54                          1.0                  31.45                         -0.04                         -1.0                  31.12                          0.33                          1.0                  31.07                          0.05                          1.0                  30.74                          0.33                          1.0                   31.66                         -0.92                          -1.0                   31.30                           0.36   
+        27                 -0.10                 -1.0          30.91                  0.49                  1.0                  30.91                  -30.910000                         -1.0                  30.81                          0.10                          1.0                  31.90                         -1.09                         -1.0                  31.91                         -0.01                         -1.0                  31.95                         -0.04                         -1.0                  31.41                          0.54                          1.0                  31.45                         -0.04                         -1.0                  31.12                          0.33                          1.0                  31.07                          0.05                          1.0                   30.74                          0.33                           1.0                   31.66                          -0.92   
+        28                  0.36                  1.0          31.40                 -0.10                 -1.0                  31.68                  -31.247358                         -1.0                  30.91                          0.77                          1.0                  30.81                          0.10                          1.0                  31.90                         -1.09                         -1.0                  31.91                         -0.01                         -1.0                  31.95                         -0.04                         -1.0                  31.41                          0.54                          1.0                  31.45                         -0.04                         -1.0                  31.12                          0.33                          1.0                   31.07                          0.05                           1.0                   30.74                           0.33   
+        29                 -0.92                 -1.0          31.30                  0.36                  1.0                  31.32                  -30.888241                         -1.0                  31.68                         -0.36                         -1.0                  30.91                          0.77                          1.0                  30.81                          0.10                          1.0                  31.90                         -1.09                         -1.0                  31.91                         -0.01                         -1.0                  31.95                         -0.04                         -1.0                  31.41                          0.54                          1.0                  31.45                         -0.04                         -1.0                   31.12                          0.33                           1.0                   31.07                           0.05   
+        30                  0.33                  1.0          31.66                 -0.92                 -1.0                  31.24                  -30.841733                         -1.0                  31.32                         -0.08                         -1.0                  31.68                         -0.36                         -1.0                  30.91                          0.77                          1.0                  30.81                          0.10                          1.0                  31.90                         -1.09                         -1.0                  31.91                         -0.01                         -1.0                  31.95                         -0.04                         -1.0                  31.41                          0.54                          1.0                   31.45                         -0.04                          -1.0                   31.12                           0.33   
+        31                  0.05                  1.0          30.74                  0.33                  1.0                  30.96                  -30.562222                         -1.0                  31.24                         -0.28                         -1.0                  31.32                         -0.08                         -1.0                  31.68                         -0.36                         -1.0                  30.91                          0.77                          1.0                  30.81                          0.10                          1.0                  31.90                         -1.09                         -1.0                  31.91                         -0.01                         -1.0                  31.95                         -0.04                         -1.0                   31.41                          0.54                           1.0                   31.45                          -0.04   
+        32                  0.33                  1.0          31.07                  0.05                  1.0                  30.98                  -30.549683                         -1.0                  30.96                          0.02                          1.0                  31.24                         -0.28                         -1.0                  31.32                         -0.08                         -1.0                  31.68                         -0.36                         -1.0                  30.91                          0.77                          1.0                  30.81                          0.10                          1.0                  31.90                         -1.09                         -1.0                  31.91                         -0.01                         -1.0                   31.95                         -0.04                          -1.0                   31.41                           0.54   
+        33                 -0.04                 -1.0          31.12                  0.33                  1.0                  31.15                  -30.646126                         -1.0                  30.98                          0.17                          1.0                  30.96                          0.02                          1.0                  31.24                         -0.28                         -1.0                  31.32                         -0.08                         -1.0                  31.68                         -0.36                         -1.0                  30.91                          0.77                          1.0                  30.81                          0.10                          1.0                  31.90                         -1.09                         -1.0                   31.91                         -0.01                          -1.0                   31.95                          -0.04   
+        34                  0.54                  1.0          31.45                 -0.04                 -1.0                  31.00                  -30.470807                         -1.0                  31.15                         -0.15                         -1.0                  30.98                          0.17                          1.0                  30.96                          0.02                          1.0                  31.24                         -0.28                         -1.0                  31.32                         -0.08                         -1.0                  31.68                         -0.36                         -1.0                  30.91                          0.77                          1.0                  30.81                          0.10                          1.0                   31.90                         -1.09                          -1.0                   31.91                          -0.01   
+        
+            ultimate\_oscillator-11 Trend  ultimate\_oscillator-12  ultimate\_oscillator Change-11  ultimate\_oscillator-12 Trend  ultimate\_oscillator-13  ultimate\_oscillator Change-12  ultimate\_oscillator-13 Trend  ultimate\_oscillator-14  ultimate\_oscillator Change-13  ultimate\_oscillator-14 Trend  
+        25                          -1.0                   30.91                           0.49                           1.0                   30.66                           0.25                           1.0                   30.26                           0.40                           1.0  
+        26                           1.0                   31.40                          -0.10                          -1.0                   30.91                           0.49                           1.0                   30.66                           0.25                           1.0  
+        27                          -1.0                   31.30                           0.36                           1.0                   31.40                          -0.10                          -1.0                   30.91                           0.49                           1.0  
+        28                           1.0                   31.66                          -0.92                          -1.0                   31.30                           0.36                           1.0                   31.40                          -0.10                          -1.0  
+        29                           1.0                   30.74                           0.33                           1.0                   31.66                          -0.92                          -1.0                   31.30                           0.36                           1.0  
+        30                           1.0                   31.07                           0.05                           1.0                   30.74                           0.33                           1.0                   31.66                          -0.92                          -1.0  
+        31                          -1.0                   31.12                           0.33                           1.0                   31.07                           0.05                           1.0                   30.74                           0.33                           1.0  
+        32                           1.0                   31.45                          -0.04                          -1.0                   31.12                           0.33                           1.0                   31.07                           0.05                           1.0  
+        33                          -1.0                   31.41                           0.54                           1.0                   31.45                          -0.04                          -1.0                   31.12                           0.33                           1.0  
+        34                          -1.0                   31.95                          -0.04                          -1.0                   31.41                           0.54                           1.0                   31.45                          -0.04                          -1.0  
+        
+        [10 rows x 536 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}    
+        
+        \PY{n}{trainingDF} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{split\PYZus{}validation}\PY{p}{]}
+        \PY{n}{validationDF} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{n}{split\PYZus{}validation}\PY{p}{,}\PY{n}{split\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+        \PY{n}{testDF} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{split\PYZus{}test}\PY{p}{]}
+        
+        \PY{n}{trainingDF} \PY{o}{=} \PY{n}{trainingDF}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{any}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{validationDF} \PY{o}{=} \PY{n}{validationDF}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{any}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{testDF} \PY{o}{=} \PY{n}{testDF}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        
+        \PY{n}{trainingDF}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+        \PY{n}{validationDF}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+        \PY{n}{testDF}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Let's use a machine learning library called
+H2O}\label{lets-use-a-machine-learning-library-called-h2o}
+
+H2O is an in-memory platform for distributed, scalable machine learning.
+H2O uses familiar interfaces like R, Python, Scala, Java, JSON and the
+Flow notebook/web interface, and works seamlessly with big data
+technologies like Hadoop and Spark. H2O provides implementations of many
+popular algorithms such as GBM, Random Forest, Deep Neural Networks,
+Word2Vec and Stacked Ensembles.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://www.h2o.ai/wp-content/uploads/2017/11/h2o-architecture-1.png}
+\caption{}
+\end{figure}
+
+    Start up the H2O engine
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}h2o.cluster().shutdown()}
+        \PY{n}{h2o}\PY{o}{.}\PY{n}{init}\PY{p}{(}\PY{n}{max\PYZus{}mem\PYZus{}size}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{12G}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{h2o}\PY{o}{.}\PY{n}{remove\PYZus{}all}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Checking whether there is an H2O instance running at http://localhost:54321{\ldots} not found.
+Attempting to start a local H2O server{\ldots}
+  Java Version: openjdk version "1.8.0\_162"; OpenJDK Runtime Environment (build 1.8.0\_162-8u162-b12-0ubuntu0.16.04.2-b12); OpenJDK 64-Bit Server VM (build 25.162-b12, mixed mode)
+  Starting server from /home/brett/.local/lib/python2.7/site-packages/h2o/backend/bin/h2o.jar
+  Ice root: /tmp/tmp9NAqBM
+  JVM stdout: /tmp/tmp9NAqBM/h2o\_brett\_started\_from\_python.out
+  JVM stderr: /tmp/tmp9NAqBM/h2o\_brett\_started\_from\_python.err
+  Server is running at http://127.0.0.1:54321
+Connecting to H2O server at http://127.0.0.1:54321{\ldots} successful.
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+--------------------------  ----------------------------------------
+H2O cluster uptime:         01 secs
+H2O cluster timezone:       America/Toronto
+H2O data parsing timezone:  UTC
+H2O cluster version:        3.18.0.7
+H2O cluster version age:    16 days
+H2O cluster name:           H2O_from_python_brett_idzbka
+H2O cluster total nodes:    1
+H2O cluster free memory:    10.67 Gb
+H2O cluster total cores:    8
+H2O cluster allowed cores:  8
+H2O cluster status:         accepting new members, healthy
+H2O connection url:         http://127.0.0.1:54321
+H2O connection proxy:
+H2O internal security:      False
+H2O API Extensions:         XGBoost, Algos, AutoML, Core V3, Core V4
+Python version:             2.7.12 final
+--------------------------  ----------------------------------------
+    \end{verbatim}
+
+    
+    Get the data that we prepared earlier, and load it into H2O.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{train} \PY{o}{=} \PY{n}{h2o}\PY{o}{.}\PY{n}{H2OFrame}\PY{p}{(}\PY{n}{trainingDF}\PY{p}{,} \PY{n}{destination\PYZus{}frame}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train.hex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{valid} \PY{o}{=} \PY{n}{h2o}\PY{o}{.}\PY{n}{H2OFrame}\PY{p}{(}\PY{n}{validationDF}\PY{p}{,} \PY{n}{destination\PYZus{}frame}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{valid.hex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{test} \PY{o}{=} \PY{n}{h2o}\PY{o}{.}\PY{n}{H2OFrame}\PY{p}{(}\PY{n}{testDF}\PY{p}{,} \PY{n}{destination\PYZus{}frame}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test.hex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}   \PY{c+c1}{\PYZsh{}Make sure there are no 0\PYZsq{}s. Enforce Bernoulli}
+         \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{asfactor}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}Make sure the target is categorical}
+         \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}                             \PY{c+c1}{\PYZsh{}Drop cheater columns}
+         \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Change}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}                      \PY{c+c1}{\PYZsh{}Drop}
+         
+         \PY{n}{valid}\PY{p}{[}\PY{n}{valid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         \PY{n}{valid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{valid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{asfactor}\PY{p}{(}\PY{p}{)}
+         \PY{n}{valid} \PY{o}{=} \PY{n}{valid}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{valid} \PY{o}{=} \PY{n}{valid}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Change}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{test}\PY{p}{[}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{asfactor}\PY{p}{(}\PY{p}{)}
+         \PY{n}{test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Change}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Set predictor and response variables}
+         \PY{n}{y} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{x} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{columns}
+         \PY{n}{x}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Parse progress: |█████████████████████████████████████████████████████████| 100\%
+Parse progress: |█████████████████████████████████████████████████████████| 100\%
+Parse progress: |█████████████████████████████████████████████████████████| 100\%
+
+    \end{Verbatim}
+
+    \subsubsection{Dimensionality Reduction with Principal Component
+Analysis
+(PCA)}\label{dimensionality-reduction-with-principal-component-analysis-pca}
+
+Our dataset currently has 100's of columns. To both speed up our
+training, and improve model accuracy, we can reduce the number of these
+inputs with dimensionality reduction. Principal Component Analysis
+converts our original variables to a new set of variables, which are a
+linear combination of the original set of variables. These variables
+would be unrelated to each other and hence, are called principal
+components. Through the use of PCA, we will be using only those
+variables that capture the maximum variance in the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{from} \PY{n+nn}{h2o.estimators.pca} \PY{k+kn}{import} \PY{n}{H2OPrincipalComponentAnalysisEstimator} \PY{k}{as} \PY{n}{H2OPCA}
+         
+         \PY{n}{pca\PYZus{}decomp} \PY{o}{=} \PY{n}{H2OPCA}\PY{p}{(}\PY{n}{k}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{,} \PY{n}{transform}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NONE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{pca\PYZus{}method}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gram\PYZus{}s\PYZus{}v\PYZus{}d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{use\PYZus{}all\PYZus{}factor\PYZus{}levels}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+         \PY{n}{pca\PYZus{}decomp}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{p}{,} \PY{n}{training\PYZus{}frame}\PY{o}{=}\PY{n}{train}\PY{p}{)}
+         \PY{n}{trainReduced} \PY{o}{=} \PY{n}{pca\PYZus{}decomp}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{train}\PY{p}{)}
+         \PY{n}{trainReduced} \PY{o}{=} \PY{n}{trainReduced}\PY{o}{.}\PY{n}{cbind}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{pca\PYZus{}decomp}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{p}{,} \PY{n}{training\PYZus{}frame}\PY{o}{=}\PY{n}{valid}\PY{p}{)}
+         \PY{n}{validReduced} \PY{o}{=} \PY{n}{pca\PYZus{}decomp}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{valid}\PY{p}{)}
+         \PY{n}{validReduced} \PY{o}{=} \PY{n}{validReduced}\PY{o}{.}\PY{n}{cbind}\PY{p}{(}\PY{n}{valid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{pca\PYZus{}decomp}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{p}{,} \PY{n}{training\PYZus{}frame}\PY{o}{=}\PY{n}{test}\PY{p}{)}
+         \PY{n}{testReduced} \PY{o}{=} \PY{n}{pca\PYZus{}decomp}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test}\PY{p}{)}
+         \PY{n}{testReduced} \PY{o}{=} \PY{n}{testReduced}\PY{o}{.}\PY{n}{cbind}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+pca Model Build progress: |███████████████████████████████████████████████| 100\%
+pca prediction progress: |████████████████████████████████████████████████| 100\%
+pca Model Build progress: |███████████████████████████████████████████████| 100\%
+pca prediction progress: |████████████████████████████████████████████████| 100\%
+pca Model Build progress: |███████████████████████████████████████████████| 100\%
+pca prediction progress: |████████████████████████████████████████████████| 100\%
+
+    \end{Verbatim}
+
+    \subsubsection{Try AutoML}\label{try-automl}
+
+See what kind of accuracy we can get from automatic model selection and
+stacking
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://image.ibb.co/eJUCPS/modelstacking.png}
+\caption{}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k+kn}{from} \PY{n+nn}{h2o.automl} \PY{k+kn}{import} \PY{n}{H2OAutoML}
+         
+         \PY{c+c1}{\PYZsh{} Set predictor and response variables}
+         \PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Close Tomorrow Trend}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{x} \PY{o}{=} \PY{n}{trainReduced}\PY{o}{.}\PY{n}{columns}
+         \PY{n}{x}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Run AutoML until 20 models are built}
+         \PY{n}{autoModel} \PY{o}{=} \PY{n}{H2OAutoML}\PY{p}{(}\PY{n}{max\PYZus{}models} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{autoModel}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{p}{,}
+                   \PY{n}{training\PYZus{}frame} \PY{o}{=} \PY{n}{trainReduced}\PY{p}{,}
+                   \PY{n}{validation\PYZus{}frame} \PY{o}{=} \PY{n}{validReduced}\PY{p}{,}
+                   \PY{n}{leaderboard\PYZus{}frame} \PY{o}{=} \PY{n}{testReduced}\PY{p}{)}
+         
+         \PY{n}{leaders} \PY{o}{=} \PY{n}{autoModel}\PY{o}{.}\PY{n}{leaderboard}
+         \PY{n}{leaders}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+AutoML progress: |████████████████████████████████████████████████████████| 100\%
+Parse progress: |█████████████████████████████████████████████████████████| 100\%
+
+    \end{Verbatim}
+
+    
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} 
+\end{Verbatim}
+            
+    \subsubsection{Train a Deep Neural Net}\label{train-a-deep-neural-net}
+
+Grid search for a good model
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://image.ibb.co/esXoyn/neural_Net.png}
+\caption{}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k+kn}{from} \PY{n+nn}{h2o.estimators.deeplearning} \PY{k+kn}{import} \PY{n}{H2ODeepLearningEstimator}
+         \PY{k+kn}{from} \PY{n+nn}{h2o.grid.grid\PYZus{}search} \PY{k+kn}{import} \PY{n}{H2OGridSearch}
+         
+         \PY{c+c1}{\PYZsh{} Set predictor and response variables}
+         \PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Close Tomorrow Trend}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{x} \PY{o}{=} \PY{n}{trainReduced}\PY{o}{.}\PY{n}{columns}
+         \PY{n}{x}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+         
+         \PY{n}{hidden\PYZus{}opt} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{75}\PY{p}{]}\PY{p}{,}
+                       \PY{c+c1}{\PYZsh{}[100],}
+                       \PY{c+c1}{\PYZsh{}[200],}
+                       \PY{c+c1}{\PYZsh{}[200,200],}
+                       \PY{c+c1}{\PYZsh{}[25,25,25],}
+                       \PY{c+c1}{\PYZsh{}[50,75,75,50],}
+                       \PY{c+c1}{\PYZsh{}[75,100,100,75],}
+                       \PY{c+c1}{\PYZsh{}[1000],}
+                       \PY{p}{[}\PY{l+m+mi}{500}\PY{p}{]}\PY{p}{,}
+                       \PY{p}{[}\PY{l+m+mi}{800}\PY{p}{]}
+                       \PY{p}{]}
+         \PY{n}{l1\PYZus{}opt} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.001}\PY{p}{]}
+         \PY{n}{l2\PYZus{}opt} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.001}\PY{p}{]}
+         \PY{n}{rate\PYZus{}opt}\PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.005}\PY{p}{]}
+         \PY{n}{activation\PYZus{}opt}\PY{o}{=}\PY{p}{[}\PY{c+c1}{\PYZsh{}\PYZdq{}Rectifier\PYZdq{},}
+                         \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RectifierWithDropout}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                         \PY{c+c1}{\PYZsh{}\PYZdq{}Tanh\PYZdq{}, \PYZdq{}TanhWithDropout\PYZdq{}, }
+                         \PY{c+c1}{\PYZsh{}\PYZdq{}Maxout\PYZdq{}, \PYZdq{}MaxoutWithDropout\PYZdq{}}
+                         \PY{p}{]}
+         \PY{n}{epochs\PYZus{}opt}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{2500}\PY{p}{,}\PY{l+m+mi}{1500}\PY{p}{,}\PY{l+m+mi}{2000}\PY{p}{]}
+         
+         \PY{n}{hyper\PYZus{}parameters} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hidden}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{hidden\PYZus{}opt}\PY{p}{,} 
+                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{l1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{l1\PYZus{}opt}\PY{p}{,} 
+                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{l2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{l2\PYZus{}opt}\PY{p}{,}
+                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{rate\PYZus{}opt}\PY{p}{,} 
+                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{activation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{activation\PYZus{}opt}\PY{p}{,}
+                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{epochs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{epochs\PYZus{}opt}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{search\PYZus{}criteria} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{strategy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RandomDiscrete}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{max\PYZus{}models}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{seed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{123456}\PY{p}{\PYZcb{}}
+         
+         
+         
+         \PY{n}{model\PYZus{}grid} \PY{o}{=} \PY{n}{H2OGridSearch}\PY{p}{(}\PY{n}{H2ODeepLearningEstimator}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                    \PY{n}{hyper\PYZus{}params}\PY{o}{=}\PY{n}{hyper\PYZus{}parameters}\PY{p}{,}
+                                    \PY{n}{search\PYZus{}criteria}\PY{o}{=}\PY{n}{search\PYZus{}criteria}\PY{p}{,}
+                                    \PY{n}{grid\PYZus{}id}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test12}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{model\PYZus{}grid}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{p}{,} 
+                          \PY{n}{y}\PY{o}{=}\PY{n}{y}\PY{p}{,}                                   
+                          \PY{n}{fast\PYZus{}mode}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}                   
+                          \PY{n}{stopping\PYZus{}rounds}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} 
+                          \PY{n}{stopping\PYZus{}tolerance}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                          \PY{n}{stopping\PYZus{}metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AUC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                          \PY{n}{adaptive\PYZus{}rate}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}
+                          \PY{n}{rate\PYZus{}annealing}\PY{o}{=}\PY{l+m+mf}{0.000001}\PY{p}{,}
+                          \PY{n}{rho}\PY{o}{=}\PY{l+m+mf}{0.95}\PY{p}{,}
+                          \PY{n}{momentum\PYZus{}ramp}\PY{o}{=}\PY{l+m+mi}{1000000}\PY{p}{,}
+                          \PY{n}{momentum\PYZus{}stable}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                          \PY{n}{momentum\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                          \PY{n}{training\PYZus{}frame}\PY{o}{=}\PY{n}{trainReduced}\PY{p}{,} 
+                          \PY{n}{validation\PYZus{}frame}\PY{o}{=}\PY{n}{validReduced}\PY{p}{,}
+                          \PY{n}{score\PYZus{}interval}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+deeplearning Grid Build progress: |███████████████████████████████████████| 100\%
+
+    \end{Verbatim}
+
+    \subsubsection{Take a Look at the Best
+Model}\label{take-a-look-at-the-best-model}
+
+Variable Importances help us see which features in the dataset our model
+valued most during training.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{model\PYZus{}gridperf1} \PY{o}{=} \PY{n}{model\PYZus{}grid}\PY{o}{.}\PY{n}{get\PYZus{}grid}\PY{p}{(}\PY{n}{sort\PYZus{}by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{decreasing}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+         \PY{n}{bestModel} \PY{o}{=} \PY{n}{model\PYZus{}gridperf1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}h2o.save\PYZus{}model(model=bestModel, path=\PYZdq{}/home/olmsteadbrett/stocks/\PYZdq{})}
+         \PY{c+c1}{\PYZsh{}bestModel = h2o.get\PYZus{}model(leaders[0,0])}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}bestModel = h2o.load\PYZus{}model(path=\PYZdq{}/home/brett/ticker/AutoML/DeepLearning\PYZus{}grid\PYZus{}0\PYZus{}AutoML\PYZus{}20180430\PYZus{}190847\PYZus{}model\PYZus{}15\PYZdq{})}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{importances} \PY{o}{=} \PY{n}{bestModel}\PY{o}{.}\PY{n}{varimp}\PY{p}{(}\PY{n}{use\PYZus{}pandas}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+         \PY{n}{importances} \PY{o}{=} \PY{n}{importances}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{variable}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relative\PYZus{}importance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{variable}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{importances}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relative\PYZus{}importance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{colors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}5AC4F2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{theme}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} <plotly.tools.PlotlyDisplay object>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{cm} \PY{o}{=} \PY{n}{bestModel}\PY{o}{.}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{valid}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+         \PY{n}{cm} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{table}\PY{o}{.}\PY{n}{as\PYZus{}data\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{confusionMatrix} \PY{o}{=} \PY{n}{FF}\PY{o}{.}\PY{n}{create\PYZus{}table}\PY{p}{(}\PY{n}{cm}\PY{p}{)}
+         \PY{n}{confusionMatrix}\PY{o}{.}\PY{n}{layout}\PY{o}{.}\PY{n}{height}\PY{o}{=}\PY{l+m+mi}{300}
+         \PY{n}{confusionMatrix}\PY{o}{.}\PY{n}{layout}\PY{o}{.}\PY{n}{width}\PY{o}{=}\PY{l+m+mi}{800}
+         \PY{n}{confusionMatrix}\PY{o}{.}\PY{n}{layout}\PY{o}{.}\PY{n}{font}\PY{o}{.}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{17}
+         \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{confusionMatrix}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} <plotly.tools.PlotlyDisplay object>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{pBestModel} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{bestModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{o}{=}\PY{n}{testReduced}\PY{p}{)}\PY{o}{.}\PY{n}{as\PYZus{}data\PYZus{}frame}\PY{p}{(}\PY{n}{use\PYZus{}pandas}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}\PY{p}{,} \PY{n}{testDF}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+deeplearning prediction progress: |███████████████████████████████████████| 100\%
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{prices} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{split\PYZus{}test}\PY{p}{]}
+         \PY{n}{prices} \PY{o}{=} \PY{n}{prices}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{profit} \PY{o}{=} \PY{n}{pBestModel}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{profit} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{prices}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}\PY{p}{,} \PY{n}{profit}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{profit}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{profit}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{)}
+         
+         \PY{n}{profit}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{invest}
+         
+         \PY{n}{profit}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Best Possible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{profit}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{row}\PY{p}{:} \PY{p}{(}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{k}{if} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{k}{else} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{profit}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Randomly Invest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{profit}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{row}\PY{p}{:} \PY{p}{(}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{k}{if} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)} \PY{k}{else} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{profit}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{profit}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{row}\PY{p}{:} \PY{p}{(}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{k}{if} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{k}{else} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{profit} \PY{o}{=} \PY{n}{profit}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Print a summary}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Times }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{stockSymbol} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ actually went up    : }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{profit}\PY{p}{[}\PY{n}{profit}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Close Tomorrow Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Times }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{stockSymbol} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ predicted to go up  : }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{profit}\PY{p}{[}\PY{n}{profit}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Profit                        : \PYZdl{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{profit}\PY{o}{.}\PY{n}{profit}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Random investment             : \PYZdl{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{profit}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Randomly Invest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best possible outcome         : \PYZdl{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{profit}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Best Possible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Plot the profit by day}
+         \PY{n}{trace1} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+             \PY{n}{x}\PY{o}{=}\PY{n}{profit}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+             \PY{n}{y}\PY{o}{=}\PY{n}{profit}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{profit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+             \PY{n}{marker} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+                   \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rgb(158,202,225)}\PY{l+s+s1}{\PYZsq{}}
+                 \PY{p}{)}\PY{p}{,}    
+             \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Profit}\PY{l+s+s1}{\PYZsq{}}
+             
+         \PY{p}{)}
+         
+         \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{n}{trace1}\PY{p}{]}
+         \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{barmode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Profit by Day}\PY{l+s+s1}{\PYZsq{}}
+         \PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+         \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Times PINC actually went up    : 44
+Times PINC predicted to go up  : 71
+Profit                        : \$141.71
+Random investment             : \$10.52
+Best possible outcome         : \$564.42
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} <plotly.tools.PlotlyDisplay object>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{bestModel}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model Details
+=============
+H2ODeepLearningEstimator :  Deep Learning
+Model Key:  test12\_model\_0
+
+
+ModelMetricsBinomial: deeplearning
+** Reported on train data. **
+
+MSE: 0.254185396033
+RMSE: 0.504168023612
+LogLoss: 0.730530150537
+Mean Per-Class Error: 0.393742808163
+AUC: 0.619865908931
+Gini: 0.239731817862
+Confusion Matrix (Act/Pred) for max f1 @ threshold = 0.0765877146138: 
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+       -1    1    Error    Rate
+-----  ----  ---  -------  -------------
+-1     22    417  0.9499   (417.0/439.0)
+1      7     381  0.018    (7.0/388.0)
+Total  29    798  0.5127   (424.0/827.0)
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Maximum Metrics: Maximum metrics at their respective thresholds
+
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+metric                       threshold    value     idx
+---------------------------  -----------  --------  -----
+max f1                       0.0765877    0.642496  381
+max f2                       0.017355     0.816155  397
+max f0point5                 0.586394     0.580229  132
+max accuracy                 0.641173     0.619105  108
+max precision                0.852887     0.818182  19
+max recall                   0.017355     1         397
+max specificity              0.999884     0.997722  0
+max absolute_mcc             0.641173     0.242661  108
+max min_per_class_accuracy   0.436066     0.587699  205
+max mean_per_class_accuracy  0.586394     0.606257  132
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Gains/Lift Table: Avg response rate: 46.92 \%
+
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+    group    cumulative_data_fraction    lower_threshold    lift      cumulative_lift    response_rate    cumulative_response_rate    capture_rate    cumulative_capture_rate    gain      cumulative_gain
+--  -------  --------------------------  -----------------  --------  -----------------  ---------------  --------------------------  --------------  -------------------------  --------  -----------------
+    1        0.0108827                   0.897509           1.42096   1.42096            0.666667         0.666667                    0.0154639       0.0154639                  42.0962   42.0962
+    2        0.0205562                   0.875262           1.59858   1.50455            0.75             0.705882                    0.0154639       0.0309278                  59.8582   50.4548
+    3        0.0302297                   0.859732           2.13144   1.70515            1                0.8                         0.0206186       0.0515464                  113.144   70.5155
+    4        0.0411125                   0.851104           1.65779   1.69262            0.777778         0.794118                    0.0180412       0.0695876                  65.7789   69.2617
+    5        0.050786                    0.839906           1.06572   1.57321            0.5              0.738095                    0.0103093       0.0798969                  6.57216   57.3208
+    6        0.100363                    0.774339           1.35165   1.46376            0.634146         0.686747                    0.0670103       0.146907                   35.1647   46.3762
+    7        0.14994                     0.718529           1.19569   1.37512            0.560976         0.645161                    0.0592784       0.206186                   19.5688   37.5125
+    8        0.200726                    0.673978           1.62396   1.43808            0.761905         0.674699                    0.0824742       0.28866                    62.3957   43.8082
+    9        0.299879                    0.586959           1.22168   1.36653            0.573171         0.641129                    0.121134        0.409794                   22.1681   36.653
+    10       0.400242                    0.505487           0.950161  1.26212            0.445783         0.592145                    0.0953608       0.505155                   -4.98385  26.2124
+    11       0.500605                    0.431496           0.898801  1.18928            0.421687         0.557971                    0.0902062       0.595361                   -10.1199  18.9284
+    12       0.599758                    0.358941           0.72781   1.11299            0.341463         0.522177                    0.0721649       0.667526                   -27.219   11.2992
+    13       0.700121                    0.29093            0.796081  1.06756            0.373494         0.500864                    0.0798969       0.747423                   -20.3919  6.75623
+    14       0.799274                    0.221067           0.961749  1.05444            0.45122          0.494705                    0.0953608       0.842784                   -3.82512  5.44356
+    15       0.899637                    0.142059           0.847441  1.03134            0.39759          0.483871                    0.0850515       0.927835                   -15.2559  3.13435
+    16       1                           0.00242546         0.719041  1                  0.337349         0.469166                    0.0721649       1                          -28.0959  0
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+ModelMetricsBinomial: deeplearning
+** Reported on validation data. **
+
+MSE: 0.278643516452
+RMSE: 0.527866949574
+LogLoss: 0.777240345062
+Mean Per-Class Error: 0.434920634921
+AUC: 0.559788359788
+Gini: 0.119576719577
+Confusion Matrix (Act/Pred) for max f1 @ threshold = 0.154223671395: 
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+       -1    1    Error    Rate
+-----  ----  ---  -------  -------------
+-1     19    116  0.8593   (116.0/135.0)
+1      8     118  0.0635   (8.0/126.0)
+Total  27    234  0.4751   (124.0/261.0)
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Maximum Metrics: Maximum metrics at their respective thresholds
+
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+metric                       threshold    value     idx
+---------------------------  -----------  --------  -----
+max f1                       0.154224     0.655556  233
+max f2                       0.0462098    0.823529  260
+max f0point5                 0.154224     0.555556  233
+max accuracy                 0.489693     0.56705   114
+max precision                0.954513     1         0
+max recall                   0.0462098    1         260
+max specificity              0.954513     1         0
+max absolute_mcc             0.489693     0.131009  114
+max min_per_class_accuracy   0.464686     0.539683  128
+max mean_per_class_accuracy  0.489693     0.565079  114
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Gains/Lift Table: Avg response rate: 48.28 \%
+
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+    group    cumulative_data_fraction    lower_threshold    lift      cumulative_lift    response_rate    cumulative_response_rate    capture_rate    cumulative_capture_rate    gain      cumulative_gain
+--  -------  --------------------------  -----------------  --------  -----------------  ---------------  --------------------------  --------------  -------------------------  --------  -----------------
+    1        0.0114943                   0.891898           1.38095   1.38095            0.666667         0.666667                    0.015873        0.015873                   38.0952   38.0952
+    2        0.0229885                   0.863343           0.690476  1.03571            0.333333         0.5                         0.00793651      0.0238095                  -30.9524  3.57143
+    3        0.0306513                   0.847055           2.07143   1.29464            1                0.625                       0.015873        0.0396825                  107.143   29.4643
+    4        0.0421456                   0.833387           0.690476  1.12987            0.333333         0.545455                    0.00793651      0.047619                   -30.9524  12.987
+    5        0.0536398                   0.823833           2.07143   1.33163            1                0.642857                    0.0238095       0.0714286                  107.143   33.1633
+    6        0.103448                    0.766526           0.956044  1.15079            0.461538         0.555556                    0.047619        0.119048                   -4.3956   15.0794
+    7        0.153257                    0.707293           0.796703  1.03571            0.384615         0.5                         0.0396825       0.15873                    -20.3297  3.57143
+    8        0.203065                    0.661478           1.27473   1.09434            0.615385         0.528302                    0.0634921       0.222222                   27.4725   9.43396
+    9        0.302682                    0.588817           1.19505   1.12749            0.576923         0.544304                    0.119048        0.34127                    19.5055   12.7486
+    10       0.402299                    0.518579           1.11538   1.12449            0.538462         0.542857                    0.111111        0.452381                   11.5385   12.449
+    11       0.501916                    0.454187           0.876374  1.07525            0.423077         0.519084                    0.0873016       0.539683                   -12.3626  7.52454
+    12       0.601533                    0.368914           1.03571   1.0687             0.5              0.515924                    0.103175        0.642857                   3.57143   6.86988
+    13       0.701149                    0.274299           0.956044  1.05269            0.461538         0.508197                    0.0952381       0.738095                   -4.3956   5.26932
+    14       0.800766                    0.22455            0.956044  1.04067            0.461538         0.502392                    0.0952381       0.833333                   -4.3956   4.06699
+    15       0.900383                    0.143286           1.03571   1.04012            0.5              0.502128                    0.103175        0.936508                   3.57143   4.01216
+    16       1                           0.0462098          0.637363  1                  0.307692         0.482759                    0.0634921       1                          -36.2637  0
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Scoring History: 
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+    timestamp            duration    training_speed    epochs    iterations    samples     training_rmse    training_logloss    training_auc    training_lift    training_classification_error    validation_rmse    validation_logloss    validation_auc    validation_lift    validation_classification_error
+--  -------------------  ----------  ----------------  --------  ------------  ----------  ---------------  ------------------  --------------  ---------------  -------------------------------  -----------------  --------------------  ----------------  -----------------  ---------------------------------
+    2018-05-01 13:39:47  0.000 sec                     0         0             0           nan              nan                 nan             nan              nan                              nan                nan                   nan               nan                nan
+    2018-05-01 13:39:47  0.236 sec   44702 obs/sec     10        1             8270        0.504168         0.73053             0.619866        1.42096          0.512696                         0.527867           0.77724               0.559788          1.38095            0.475096
+    2018-05-01 13:39:50  3.923 sec   322375 obs/sec    1500      150           1.2405e+06  0.211038         0.184925            0.995617        2.13144          0.019347                         0.597159           1.37391               0.522399          1.38095            0.51341
+    2018-05-01 13:39:50  3.951 sec   322207 obs/sec    1500      150           1.2405e+06  0.504168         0.73053             0.619866        1.42096          0.512696                         0.527867           0.77724               0.559788          1.38095            0.475096
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Variable Importances: 
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+variable    relative_importance    scaled_importance    percentage
+----------  ---------------------  -------------------  ---------------
+PC24        1.0                    1.0                  0.043324942437
+PC19        0.999520778656         0.999520778656       0.0433041801999
+PC3         0.99864512682          0.99864512682        0.0432662426345
+PC10        0.997211694717         0.997211694717       0.0432041392712
+PC15        0.990485012531         0.990485012531       0.0429127061526
+---         ---                    ---                  ---
+PC1         0.831207513809         0.831207513809       0.036012017689
+PC18        0.805834591389         0.805834591389       0.0349127372857
+PC17        0.791410446167         0.791410446167       0.0342878120242
+PC8         0.77470099926          0.77470099926        0.0335638761988
+PC22        0.735004961491         0.735004961491       0.0318440476475
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+See the whole table with table.as\_data\_frame()
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

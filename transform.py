@@ -14,6 +14,7 @@ def windowTransform(df, window):
         df['Open Change-'+str(i-1)] = df['Open-'+str(i-1)] - df['Open-'+str(i)] 
         df['Open-'+str(i)+' Trend'] = df['Open Change-'+str(i-1)].apply(np.sign)
     df.drop('Open-0',axis=1, inplace=True)
+    df.rename(columns={'Open Change-0':'Open Change'}, inplace=True)
     
     #High window
     df['High-0'] = df.High
@@ -22,7 +23,8 @@ def windowTransform(df, window):
         df['High Change-'+str(i-1)] = df['High-'+str(i-1)] - df['High-'+str(i)] 
         df['High-'+str(i)+' Trend'] = df['High Change-'+str(i-1)].apply(np.sign)
     df.drop('High-0',axis=1, inplace=True)                                                                        
-                                                                        
+    df.rename(columns={'High Change-0':'High Change'}, inplace=True)
+    
     #Low window
     df['Low-0'] = df.Low
     for i in range(1,window):
@@ -30,7 +32,8 @@ def windowTransform(df, window):
         df['Low Change-'+str(i-1)] = df['Low-'+str(i-1)] - df['Low-'+str(i)] 
         df['Low-'+str(i)+' Trend'] = df['Low Change-'+str(i-1)].apply(np.sign)
     df.drop('Low-0',axis=1,  inplace=True)
-                   
+    df.rename(columns={'Low Change-0':'Low Change'}, inplace=True)
+    
     #Close window
     df['Close-0'] = df.Close
     for i in range(1,window):
@@ -38,7 +41,8 @@ def windowTransform(df, window):
         df['Close Change-'+str(i-1)] = df['Close-'+str(i-1)] - df['Close-'+str(i)] 
         df['Close-'+str(i)+' Trend'] = df['Close Change-'+str(i-1)].apply(np.sign)
     df.drop('Close-0',axis=1, inplace=True)                                                                     
-
+    df.rename(columns={'Close Change-0':'Close Change'}, inplace=True)
+    
     #BBand window
     df['BBand-Upper-0'] = df['bol_bands_upper']
     df['BBand-Lower-0'] = df['bol_bands_lower']
@@ -59,7 +63,10 @@ def windowTransform(df, window):
 
     df.drop('BBand-Upper-0',axis=1, inplace=True)
     df.drop('BBand-Lower-0',axis=1, inplace=True)
-    df.drop('BBand-Middle-0',axis=1, inplace=True)                                                                        
+    df.drop('BBand-Middle-0',axis=1, inplace=True)
+    df.rename(columns={'BBand-Upper Change-0':'BBand-Upper Change',
+                       'BBand-Lower Change-0':'BBand-Lower Change',
+                       'BBand-Middle Change-0':'BBand-Middle Change'}, inplace=True)
 
     #Macd window
     df['MACD-0'] = df['macd_val']
@@ -75,6 +82,8 @@ def windowTransform(df, window):
 
     df.drop('MACD-0',axis=1, inplace=True)
     df.drop('MACD_Signal-0',axis=1, inplace=True)
+    df.rename(columns={'MACD Change-0':'MACD Change',
+                       'MACD_Signal Change-0':'MACD_Signal Change'}, inplace=True)
                                                                         
     df['DayOfWeek'] = df['Date'].dt.dayofweek
     df['DayOfYear'] = df['Date'].dt.dayofyear
@@ -88,7 +97,8 @@ def windowTransform(df, window):
         df['rsi-'+str(i)+' Trend'] = df['rsi Change-'+str(i-1)].apply(np.sign)
   
     df.drop(['rsi-0','rsi_u','rsi_d'], axis=1, inplace=True)
-  
+    df.rename(columns={'rsi Change-0':'rsi Change'}, inplace=True)
+    
     #Williams %R
     df['williams_r-0'] = df.williams_r
     for i in range(1,window):
@@ -97,7 +107,8 @@ def windowTransform(df, window):
         df['williams_r-'+str(i)+' Trend'] = df['williams_r Change-'+str(i-1)].apply(np.sign)
   
     df.drop(['williams_r-0'], axis=1, inplace=True)
-  
+    df.rename(columns={'williams_r Change-0':'williams_r Change'}, inplace=True)
+    
     #ultimate_oscillator
     df['ultimate_oscillator-0'] = df.ultimate_oscillator
     for i in range(1,window):
@@ -105,5 +116,8 @@ def windowTransform(df, window):
         df['ultimate_oscillator Change-'+str(i-1)] = df['ultimate_oscillator-'+str(i-1)] - df['ultimate_oscillator-'+str(i)] 
         df['ultimate_oscillator-'+str(i)+' Trend'] = df['ultimate_oscillator Change-'+str(i-1)].apply(np.sign)
   
-    df.drop(['ultimate_oscillator-0'], axis=1, inplace=True)                                                                       
+    df.drop(['ultimate_oscillator-0'], axis=1, inplace=True) 
+    df.rename(columns={'ultimate_oscillator Change-0':'ultimate_oscillator Change'}, inplace=True)
+
+    df.dropna(axis=0, how='any', inplace=True)
     return df
